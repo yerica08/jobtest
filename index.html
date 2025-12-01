@@ -304,7 +304,7 @@
                         <span class="badge">탱커 · 힐러 · 딜러 MBTI</span>
                     </h1>
                     <p class="subtitle">
-                        12개의 질문으로 내가 진짜 좋아하는 전투 스타일을 찾아보자.<br />
+                        10개의 질문으로 내가 진짜 좋아하는 전투 스타일을 찾아보자.<br />
                         결과는 <strong>탱커 / 힐러 / 딜러</strong> 큰 축 + 세부 직업으로 나와요.
                     </p>
                 </header>
@@ -313,7 +313,7 @@
                 <div id="quiz-area">
                     <div class="progress">
                         <div class="progress-label">
-                            <span id="progress-text">1 / 12</span>
+                            <span id="progress-text">1 / 10</span>
                             <span>내 자리가 어딘지 찾아가는 중…</span>
                         </div>
                         <div class="progress-bar">
@@ -481,271 +481,107 @@
 
             // -----------------------------
             // 2. 질문 & 보기 데이터
-            //    각 보기 -> jobKey 하나에 매핑
+            //    (새 10문항 + 짧은 선택지)
             // -----------------------------
             const questions = [
                 {
                     id: 1,
-                    text: '🎯 Q1. 전장에서 나는 보통 어떤 역할에 끌린다?',
+                    text: '🎯 Q1. 새 게임을 시작해서 직업 설명을 읽을 때,\n어떤 문장에 먼저 눈이 가?',
                     options: [
-                        {
-                            text: '앞에 서서 맞아주고, 모두를 대신해 버텨준다.',
-                            job: 'tank_shield',
-                        },
-                        {
-                            text: '뒤에서 전체 상황을 보면서 팀원 체력을 챙긴다.',
-                            job: 'healer_magic',
-                        },
-                        {
-                            text: '강한 딜 넣어서 적을 녹여버리는 게 제일 짜릿하다.',
-                            job: 'dps_sword_dual',
-                        },
-                        {
-                            text: '직접 맞붙기보단, 소환수나 버프를 걸어서 간접적으로 조종하는 걸 좋아한다.',
-                            job: 'dps_summoner',
-                        },
+                        { text: '오래 키울수록 빛나는 캐릭', job: 'tank_shield' },
+                        { text: '파티랑 있을 때 더 빛나는 캐릭', job: 'healer_buffer' },
+                        { text: '손 바쁘고 내가 판 주도하는 캐릭', job: 'dps_sword_dual' },
+                        { text: '판 깔아놓고 한 방에 뒤집는 캐릭', job: 'dps_summoner' },
                     ],
                 },
                 {
                     id: 2,
-                    text: '🛡 Q2. 내 체력이 1 남은 위기 상황! 나는?',
+                    text: '🪄 Q2. 튜토리얼 끝나고\n첫 스킬 포인트를 준다면 어디에 찍을까?',
                     options: [
-                        {
-                            text: '“내가 막을게!” 라며 방패 들고 한 번 더 버틴다. (우직하게 맞탱 느낌)',
-                            job: 'tank_orc',
-                        },
-                        {
-                            text: '뒤로 빠져서 스스로 회복하거나 힐을 준비한다.',
-                            job: 'healer_magic',
-                        },
-                        {
-                            text: '광전사처럼 “크와아악!!!” 하며 마지막 광폭 딜을 꽂는다.',
-                            job: 'tank_berserker',
-                        },
-                        {
-                            text: '연막/은신 등으로 빠르게 빠져나와서 다음 한 방을 준비한다.',
-                            job: 'dps_rogue',
-                        },
+                        { text: '좀 맞아도 안 죽게 해주는 패시브', job: 'tank_orc' },
+                        { text: '모두 덜 힘들어지는 버프·회복', job: 'healer_magic' },
+                        { text: '숫자 제일 크게 터지는 공격기', job: 'dps_elemental' },
+                        { text: '소환·디버프 같은 간접 스킬', job: 'dps_darkmage' },
                     ],
                 },
                 {
                     id: 3,
-                    text: '⚔ Q3. 가장 써보고 싶은 스킬은?',
+                    text: '💀 Q3. 게임에서 죽었을 때,\n가장 “억울하다” 느끼는 순간은?',
                     options: [
-                        {
-                            text: '거대한 방패로 적의 공격을 튕겨내고, 팀 어그로를 전부 끌어오는 스킬.',
-                            job: 'tank_shield',
-                        },
-                        {
-                            text: '아군 전체 체력과 이동속도를 동시에 올려주는 버프 스킬.',
-                            job: 'healer_buffer',
-                        },
-                        {
-                            text: '맞을수록 공격력이 오르고, 치명타가 터질수록 피가 차오르는 광폭 스킬.',
-                            job: 'tank_berserker',
-                        },
-                        {
-                            text: '어둠의 기운을 모아 적 하나를 순식간에 삭제하는 저주/암살계 스킬.',
-                            job: 'dps_darkmage',
-                        },
+                        { text: '판 깔기도 전에 잘린 느낌', job: 'tank_shield' },
+                        { text: '뭘 해보기도 전에 전투 끝남', job: 'healer_magic' },
+                        { text: '이제 마무리인데 그 순간에 누움', job: 'dps_sword_one' },
+                        { text: '이제 슬슬 터질 세팅이 리셋됨', job: 'dps_darkmage' },
                     ],
                 },
                 {
                     id: 4,
-                    text: '🌋 Q4. 판타지 세계에서 딱 하나만 무기를 고를 수 있다면?',
+                    text: '📢 Q4. 파티 구인글을 볼 때,\n어떤 문구가 있으면 “이 파티 재밌겠다” 싶어?',
                     options: [
-                        {
-                            text: '크고 단단한 방패 + 짧은 검.',
-                            job: 'tank_shield',
-                        },
-                        {
-                            text: '빛나는 지팡이, 원소 마법을 쏟아낼 수 있는 스태프.',
-                            job: 'dps_elemental',
-                        },
-                        {
-                            text: '손에 착 감기는 한 손검(일검) 혹은 화려한 쌍검.',
-                            job: 'dps_sword_dual',
-                        },
-                        {
-                            text: '롱보우(활)와 화살통, 멀리서 치명타를 꽂는 활.',
-                            job: 'dps_archer',
-                        },
+                        { text: '“실수해도 천천히 다시 갑니다”', job: 'healer_physio' },
+                        { text: '“목표만 같으면 방법은 자유”', job: 'healer_buffer' },
+                        { text: '“빠른 도전·리트 환영”', job: 'dps_sword_dual' },
+                        { text: '“특이 빌드·실험 조합 환영”', job: 'dps_rogue' },
                     ],
                 },
                 {
                     id: 5,
-                    text: '🧠 Q5. 전장을 보는 나의 시야 스타일은?',
+                    text: '⚔ Q5. 전투 스타일 중,\n가장 재미있는 구조는?',
                     options: [
-                        {
-                            text: '앞에 있는 적과 나의 체력만 본다. “일단 버티고 본다.”',
-                            job: 'tank_orc',
-                        },
-                        {
-                            text: '미니맵·파티 체력·쿨타임 등 전체를 동시에 보면서 운영한다.',
-                            job: 'healer_buffer',
-                        },
-                        {
-                            text: '내가 노릴 타겟 하나만 정해서, 그 녀석만 파고든다.',
-                            job: 'dps_sword_one',
-                        },
-                        {
-                            text: '직접 나가기보단, 소환수/펫의 위치와 상태를 중심으로 본다.',
-                            job: 'dps_summoner',
-                        },
+                        { text: '할수록 안정감 올라가는 전투', job: 'tank_orc' },
+                        { text: '타이밍 맞을수록 깔끔해지는 전투', job: 'healer_buffer' },
+                        { text: '손 바쁠수록 더 재밌는 전투', job: 'dps_elemental' },
+                        { text: '미리 깔아둔 세팅이 빛나는 전투', job: 'dps_rogue' },
                     ],
                 },
                 {
                     id: 6,
-                    text: '❤️‍🩹 Q6. 팀원이 피가 빠르게 깎이고 있을 때 나는?',
+                    text: '🧭 Q6. 솔플 기준으로,\n내가 가장 편하다고 느끼는 캐릭터는?',
                     options: [
-                        {
-                            text: '몸으로 가로막아서라도 적의 공격을 대신 맞는다.',
-                            job: 'tank_shield',
-                        },
-                        {
-                            text: '힐과 보호막을 연달아 걸어 안정적으로 회복시킨다.',
-                            job: 'healer_magic',
-                        },
-                        {
-                            text: '그 팀원을 괴롭히는 적을 먼저 삭제해서 ‘위험 요인’을 없앤다.',
-                            job: 'dps_rogue',
-                        },
-                        {
-                            text: '전체 공격력/이속 버프를 걸어, 싸움을 빨리 끝내게 만들어준다.',
-                            job: 'healer_buffer',
-                        },
+                        { text: '실수해도 한 번 더 버틸 수 있는 캐릭', job: 'tank_shield' },
+                        { text: '자기 버프 돌리며 꾸준히 미는 캐릭', job: 'healer_paladin' },
+                        { text: '한 번 흐름 잡으면 쓸어버리는 캐릭', job: 'tank_berserker' },
+                        { text: '세팅만 해두면 알아서 돌아가는 캐릭', job: 'dps_summoner' },
                     ],
                 },
                 {
                     id: 7,
-                    text: '🧬 Q7. 판타지 세계에서 ‘나’의 성격을 가장 잘 표현하는 말은?',
+                    text: '🧥 Q7. 장비(룩) 기준으로 보면,\n가장 먼저 시선이 가는 건?',
                     options: [
-                        {
-                            text: '“우직하고 단단한 벽.” – 맞으면서 버티는 게 어울린다.',
-                            job: 'tank_orc',
-                        },
-                        {
-                            text: '“팀의 매니저.” – 모두의 상태를 체크하며 뒤에서 조율한다.',
-                            job: 'healer_buffer',
-                        },
-                        {
-                            text: '“광기 어린 전투광.” – 피 튀기는 전투, 강한 타격감이 좋아.',
-                            job: 'tank_berserker',
-                        },
-                        {
-                            text: '“그림자.” – 조용히 다가가 한 방에 끝내거나, 보이지 않는 곳에서 조종한다.',
-                            job: 'dps_darkmage',
-                        },
+                        { text: '딱 봐도 안 쓰러질 것 같은 갑옷', job: 'tank_orc' },
+                        { text: '문양·상징 가득한 로브·지팡이', job: 'healer_magic' },
+                        { text: '간지나는 검·쌍검·단검·활', job: 'dps_sword_dual' },
+                        { text: '후드·망토 + 펫·소환수 세트', job: 'dps_archer' },
                     ],
                 },
                 {
                     id: 8,
-                    text: '🌀 Q8. 마법을 쓸 수 있다면 가장 끌리는 콘셉트는?',
+                    text: '📖 Q8. 스토리/컨셉으로\n가장 땡기는 건?',
                     options: [
-                        {
-                            text: '적의 체력과 능력을 빨아들여 내 힘으로 바꾸는 흑마법·저주 계열.',
-                            job: 'dps_darkmage',
-                        },
-                        {
-                            text: '불·물·바람 같은 원소를 다루며, 화려한 이펙트로 적을 쓸어버리는 원소 마법.',
-                            job: 'dps_elemental',
-                        },
-                        {
-                            text: '아군을 치유하고 보호막을 씌워주는 힐·버프 계열의 빛 마법.',
-                            job: 'healer_magic',
-                        },
-                        {
-                            text: '직접 싸우기보다, 강력한 소환수를 여러 마리 불러내 싸우게 하는 소환 마법.',
-                            job: 'dps_summoner',
-                        },
+                        { text: '서 있기만 해도 위압감 있는 탱 느낌 캐릭', job: 'tank_orc' },
+                        { text: '빛·치유·보호로 사람 살리는 캐릭', job: 'healer_magic' },
+                        { text: '분노·복수·금단의 힘 다루는 흑화 캐릭', job: 'dps_darkmage' },
+                        { text: '계약·소환·동물·영혼 부리는 캐릭', job: 'dps_summoner' },
                     ],
                 },
                 {
                     id: 9,
-                    text: '🐾 Q9. 동물/펫과 전투 스타일을 고르자면?',
+                    text: '🧬 Q9. 솔플 기준으로,\n내가 원하는 캐릭터 느낌은?',
                     options: [
-                        {
-                            text: '특별히 펫은 필요 없다. 내 몸 하나로 충분하다.',
-                            job: 'dps_sword_one',
-                        },
-                        {
-                            text: '전투 중간에 잠깐 잠깐 등장해 도와주는 소환수 정도면 좋다.',
-                            job: 'dps_summoner',
-                        },
-                        {
-                            text: '전장을 함께 뛰어다니며, 새나 동물과 ‘파트너 플레이’를 하는 궁수 타입이 좋다.',
-                            job: 'dps_archer',
-                        },
-                        {
-                            text: '전투보다, 전투 이후에 팀원이나 동물을 재활·케어해주는 쪽이 더 끌린다.',
-                            job: 'healer_physio',
-                        },
+                        { text: '잘못 들어가도 “일단 버텨보자” 되는 캐릭', job: 'tank_shield' },
+                        { text: '혼자 버프·회복 돌리며 마라톤 하는 캐릭', job: 'healer_physio' },
+                        { text: '몰입하면 몹이 그냥 녹아버리는 캐릭', job: 'dps_elemental' },
+                        { text: '소환수·함정·효과가 다 처리해주는 캐릭', job: 'dps_summoner' },
                     ],
                 },
                 {
                     id: 10,
-                    text: '🛡✨ Q10. 갑옷/외형에 대한 나의 로망은?',
+                    text: '📊 Q10. 전투가 끝난 뒤,\n나를 가장 뿌듯하게 만드는 결과 화면은?',
                     options: [
-                        {
-                            text: '전신을 덮는 묵직한 판금 갑옷, 거대한 방패까지 풀세트.',
-                            job: 'healer_paladin',
-                        },
-                        {
-                            text: '로브와 망토, 빛나는 문양이 새겨진 마법사 복장.',
-                            job: 'dps_elemental',
-                        },
-                        {
-                            text: '가볍고 날렵한 가죽 갑옷, 몸에 딱 붙는 흑색/다크톤 장비.',
-                            job: 'dps_rogue',
-                        },
-                        {
-                            text: '움직임을 방해하지 않는 실용적인 옷, 팔·다리에만 보호구.',
-                            job: 'dps_archer',
-                        },
-                    ],
-                },
-                {
-                    id: 11,
-                    text: '🚀 Q11. 게임 플레이 템포를 고른다면?',
-                    options: [
-                        {
-                            text: '느리지만 단단하게, 오래 싸우며 버티는 맛이 있는 전투.',
-                            job: 'tank_orc',
-                        },
-                        {
-                            text: '중간 템포, 상황을 보며 힐·버프·디버프를 적절히 섞는 전략적인 전투.',
-                            job: 'healer_magic',
-                        },
-                        {
-                            text: '빠르게 접근해서 순식간에 폭딜 넣고 빠지는 전투.',
-                            job: 'dps_sword_dual',
-                        },
-                        {
-                            text: '내가 움직이는 시간보다 소환수·펫이 알아서 싸우는 걸 보는 템포.',
-                            job: 'dps_summoner',
-                        },
-                    ],
-                },
-                {
-                    id: 12,
-                    text: '🎯 Q12. “내가 하고 싶은 한 줄 소개”에 가장 가까운 것은?',
-                    options: [
-                        {
-                            text: '“앞에서 끝까지 버티는, 파티의 방패.”',
-                            job: 'tank_shield',
-                        },
-                        {
-                            text: '“팀원들의 생명줄을 쥔 치유자 & 버퍼.”',
-                            job: 'healer_physio',
-                        },
-                        {
-                            text: '“한 번 휘두르면 적이 사라지는, 전장의 딜링 머신.”',
-                            job: 'dps_elemental',
-                        },
-                        {
-                            text: '“보이지 않는 곳에서 전장을 조종하는, 그림자 같은 존재.”',
-                            job: 'dps_darkmage',
-                        },
+                        { text: '끝까지 자리를 꾸준히 채운 그래프', job: 'tank_shield' },
+                        { text: '자잘한 내 흔적이 여기저기 찍힌 로그', job: 'healer_buffer' },
+                        { text: '중간중간 데미지 봉우리 확 튀는 그래프', job: 'dps_sword_dual' },
+                        { text: '내 이름은 적어도, 내가 건 조건이 판 바꾼 느낌', job: 'dps_darkmage' },
                     ],
                 },
             ];
@@ -755,7 +591,6 @@
             // -----------------------------
             let currentIndex = 0;
             const jobScores = {};
-
             Object.keys(jobMeta).forEach((key) => (jobScores[key] = 0));
 
             // -----------------------------
