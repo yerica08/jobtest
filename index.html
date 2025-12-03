@@ -2,791 +2,786 @@
 <html lang="ko">
     <head>
         <meta charset="UTF-8" />
-        <title>나의 전장 직업 성향 테스트</title>
+        <title>판타지 직업 성향 테스트</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <!-- 카톡 공유 썸네일용 (원하면 이미지 주소 바꿔 쓰기) -->
-        <meta property="og:title" content="나의 전장 직업 성향 테스트" />
-        <meta
-            property="og:description"
-            content="탱커 / 힐러 / 딜러, 그리고 그 안의 세부 직업까지! 나에게 찰떡인 전장 포지션을 알아보자."
-        />
-        <meta property="og:image" content="https://example.com/your-thumbnail.png" />
-        <meta property="og:type" content="website" />
-
         <style>
-            :root {
-                --bg: #0b0b10;
-                --card: #181824;
-                --accent: #f97316;
-                --accent-soft: rgba(249, 115, 22, 0.2);
-                --text: #f9fafb;
-                --muted: #9ca3af;
-                --border: #27273a;
-            }
-
             * {
                 box-sizing: border-box;
             }
-
             body {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                background: #0f172a;
+                color: #e5e7eb;
                 margin: 0;
                 padding: 0;
-                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-                background: radial-gradient(circle at top, #1f2937 0, #020617 50%, #000 100%);
-                color: var(--text);
                 display: flex;
                 justify-content: center;
+                align-items: flex-start;
                 min-height: 100vh;
             }
-
             .app {
+                max-width: 640px;
                 width: 100%;
-                max-width: 720px;
                 padding: 24px 16px 40px;
             }
-
             .card {
-                background: linear-gradient(135deg, #111827 0%, #020617 100%);
-                border-radius: 20px;
-                border: 1px solid var(--border);
-                box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
+                background: rgba(15, 23, 42, 0.95);
+                border-radius: 16px;
                 padding: 24px 20px 28px;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+                border: 1px solid rgba(148, 163, 184, 0.4);
             }
-
-            @media (min-width: 640px) {
-                .card {
-                    padding: 28px 28px 32px;
-                }
-            }
-
             h1 {
-                margin: 0;
                 font-size: 1.6rem;
-                display: flex;
-                align-items: center;
-                gap: 8px;
+                margin: 0 0 12px;
+                color: #fbbf24;
             }
-
-            h1 span.badge {
-                font-size: 0.85rem;
-                background: var(--accent-soft);
-                color: var(--accent);
-                padding: 4px 10px;
-                border-radius: 999px;
-                border: 1px solid rgba(249, 115, 22, 0.4);
-            }
-
             .subtitle {
-                margin-top: 6px;
-                font-size: 0.92rem;
-                color: var(--muted);
+                font-size: 0.95rem;
+                color: #cbd5f5;
+                margin-bottom: 20px;
+            }
+            .question-text {
+                font-size: 1.1rem;
+                margin-bottom: 18px;
                 line-height: 1.5;
             }
-
-            .progress {
-                margin-top: 18px;
-                margin-bottom: 16px;
-            }
-
-            .progress-label {
-                display: flex;
-                justify-content: space-between;
-                font-size: 0.78rem;
-                color: var(--muted);
-                margin-bottom: 4px;
-            }
-
-            .progress-bar {
-                width: 100%;
-                height: 6px;
-                border-radius: 999px;
-                background: #020617;
-                border: 1px solid #111827;
-                overflow: hidden;
-            }
-
-            .progress-inner {
-                height: 100%;
-                width: 0%;
-                border-radius: 999px;
-                background: linear-gradient(90deg, #f97316, #facc15);
-                transition: width 0.25s ease;
-            }
-
-            .question-box {
-                margin-top: 12px;
-            }
-
-            .question-text {
-                font-size: 1.05rem;
-                line-height: 1.6;
-                margin-bottom: 14px;
-                white-space: pre-line;
-            }
-
             .options {
                 display: flex;
                 flex-direction: column;
-                gap: 8px;
+                gap: 10px;
+                margin-bottom: 18px;
             }
-
             .option-btn {
                 width: 100%;
-                text-align: left;
-                padding: 10px 12px;
-                font-size: 0.95rem;
-                border-radius: 12px;
-                border: 1px solid #27273a;
-                background: rgba(15, 23, 42, 0.9);
-                color: var(--text);
-                cursor: pointer;
-                transition: transform 0.08s ease, box-shadow 0.08s ease, border-color 0.08s ease, background 0.08s ease;
-            }
-
-            .option-btn:hover {
-                transform: translateY(-1px);
-                border-color: var(--accent);
-                box-shadow: 0 10px 30px rgba(249, 115, 22, 0.35);
-                background: radial-gradient(circle at top left, #1f2937, #020617);
-            }
-
-            .option-btn:active {
-                transform: translateY(0);
-                box-shadow: none;
-            }
-
-            .footer {
-                margin-top: 18px;
-                font-size: 0.78rem;
-                color: var(--muted);
-                display: flex;
-                justify-content: space-between;
-                gap: 8px;
-                flex-wrap: wrap;
-            }
-
-            .footer span {
-                opacity: 0.9;
-            }
-
-            /* 결과 영역 */
-            .result-box {
-                margin-top: 18px;
-            }
-
-            .role-pills {
-                display: flex;
-                gap: 6px;
-                flex-wrap: wrap;
-                margin-top: 8px;
-                margin-bottom: 14px;
-            }
-
-            .pill {
-                font-size: 0.8rem;
-                padding: 3px 10px;
                 border-radius: 999px;
-                border: 1px solid #374151;
+                border: 1px solid rgba(148, 163, 184, 0.8);
+                padding: 12px 16px;
+                font-size: 0.98rem;
+                text-align: left;
                 background: rgba(15, 23, 42, 0.9);
-                color: var(--muted);
+                color: #e5e7eb;
+                cursor: pointer;
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s ease;
             }
-
-            .pill.main-role {
-                border-color: var(--accent);
-                color: var(--accent);
-                background: var(--accent-soft);
+            .option-btn span.badge {
+                font-weight: 600;
+                font-size: 0.85rem;
+                padding: 4px 9px;
+                border-radius: 999px;
+                background: rgba(55, 65, 81, 0.9);
+                color: #f9fafb;
             }
-
-            .result-title {
-                font-size: 1.3rem;
-                margin-top: 4px;
-                margin-bottom: 6px;
+            .option-btn:hover {
+                background: rgba(30, 64, 175, 0.9);
+                box-shadow: 0 8px 14px rgba(30, 64, 175, 0.4);
+                transform: translateY(-1px);
             }
-
-            .result-subtitle {
-                font-size: 0.92rem;
-                color: var(--muted);
-                margin-bottom: 10px;
+            .option-btn:active {
+                transform: translateY(1px);
+                box-shadow: 0 4px 8px rgba(15, 23, 42, 0.7);
             }
-
-            .result-desc {
-                font-size: 0.9rem;
-                line-height: 1.6;
+            .progress {
+                font-size: 0.85rem;
+                color: #9ca3af;
+                margin-bottom: 4px;
+            }
+            .stage-label {
+                font-size: 0.82rem;
+                color: #a5b4fc;
                 margin-bottom: 12px;
             }
-
-            .role-bars {
-                margin-top: 8px;
-                margin-bottom: 14px;
-                font-size: 0.8rem;
+            .center {
+                text-align: center;
             }
-
-            .role-row {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                margin-bottom: 6px;
-            }
-
-            .role-name {
-                width: 56px;
-                text-align: right;
-                color: var(--muted);
-            }
-
-            .role-bar-wrap {
-                flex: 1;
-                height: 6px;
-                border-radius: 999px;
-                background: #020617;
-                overflow: hidden;
-            }
-
-            .role-bar-inner {
-                height: 100%;
-                width: 0%;
-                border-radius: 999px;
-                background: linear-gradient(90deg, #4b5563, #9ca3af);
-            }
-
-            .role-bar-inner.main {
-                background: linear-gradient(90deg, #f97316, #facc15);
-            }
-
-            .role-percent {
-                width: 34px;
-                text-align: right;
-                color: var(--muted);
-            }
-
-            .actions {
-                margin-top: 16px;
-                display: flex;
-                gap: 8px;
-                flex-wrap: wrap;
-            }
-
-            .btn {
-                padding: 8px 14px;
-                border-radius: 999px;
-                border: 1px solid transparent;
-                font-size: 0.9rem;
-                cursor: pointer;
+            .primary-btn {
                 display: inline-flex;
                 align-items: center;
-                gap: 6px;
-            }
-
-            .btn-primary {
-                background: linear-gradient(135deg, #f97316, #facc15);
-                color: #111827;
+                justify-content: center;
+                padding: 11px 18px;
+                border-radius: 999px;
+                border: none;
+                background: linear-gradient(135deg, #22c55e, #3b82f6);
+                color: #f9fafb;
+                font-size: 0.98rem;
                 font-weight: 600;
+                cursor: pointer;
+                margin-top: 4px;
+                box-shadow: 0 10px 24px rgba(59, 130, 246, 0.45);
+                transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
             }
-
-            .btn-outline {
-                background: transparent;
-                border-color: #374151;
-                color: var(--muted);
+            .primary-btn:hover {
+                filter: brightness(1.05);
+                transform: translateY(-1px);
+                box-shadow: 0 14px 30px rgba(59, 130, 246, 0.6);
             }
-
-            .hidden {
-                display: none;
+            .primary-btn:active {
+                transform: translateY(1px);
+                box-shadow: 0 6px 14px rgba(15, 23, 42, 0.9);
+            }
+            .result-title {
+                font-size: 1.4rem;
+                margin-bottom: 8px;
+                color: #facc15;
+            }
+            .result-job {
+                font-size: 1.9rem;
+                margin-bottom: 12px;
+                color: #f97316;
+            }
+            .result-desc {
+                font-size: 0.97rem;
+                color: #e5e7eb;
+                line-height: 1.6;
+                margin-bottom: 14px;
+            }
+            .result-meta {
+                font-size: 0.9rem;
+                color: #9ca3af;
+                margin-bottom: 8px;
+            }
+            .badge-role {
+                display: inline-block;
+                padding: 3px 8px;
+                border-radius: 999px;
+                font-size: 0.8rem;
+                margin-right: 4px;
+                background: rgba(37, 99, 235, 0.28);
+                color: #bfdbfe;
+                border: 1px solid rgba(59, 130, 246, 0.6);
+            }
+            @media (max-width: 480px) {
+                .card {
+                    padding: 20px 16px 22px;
+                }
+                h1 {
+                    font-size: 1.35rem;
+                }
+                .question-text {
+                    font-size: 1.02rem;
+                }
+                .option-btn {
+                    font-size: 0.92rem;
+                }
             }
         </style>
     </head>
     <body>
         <div class="app">
-            <div class="card">
-                <header>
-                    <h1>
-                        ⚔ 나의 전장 직업 성향 테스트
-                        <span class="badge">탱커 · 힐러 · 딜러 MBTI</span>
-                    </h1>
-                    <p class="subtitle">
-                        10개의 질문으로 내가 진짜 좋아하는 전투 스타일을 찾아보자.<br />
-                        결과는 <strong>탱커 / 힐러 / 딜러</strong> 큰 축 + 세부 직업으로 나와요.
-                    </p>
-                </header>
-
-                <!-- 진행도 / 질문 영역 -->
-                <div id="quiz-area">
-                    <div class="progress">
-                        <div class="progress-label">
-                            <span id="progress-text">1 / 10</span>
-                            <span>내 자리가 어딘지 찾아가는 중…</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-inner" id="progress-inner"></div>
-                        </div>
-                    </div>
-
-                    <div class="question-box">
-                        <div class="question-text" id="question-text"></div>
-                        <div class="options" id="options"></div>
-                    </div>
-
-                    <div class="footer">
-                        <span>선택 즉시 다음 문항으로 넘어가요.</span>
-                        <span>※ 장난용 테스트, 진지하게 싸우지 않기 🥹</span>
-                    </div>
-                </div>
-
-                <!-- 결과 영역 -->
-                <div id="result-area" class="result-box hidden">
-                    <div id="result-role-pills" class="role-pills"></div>
-                    <div class="result-title" id="result-title"></div>
-                    <div class="result-subtitle" id="result-subtitle"></div>
-                    <div class="result-desc" id="result-desc"></div>
-
-                    <div class="role-bars" id="role-bars"></div>
-
-                    <div class="actions">
-                        <button class="btn btn-primary" id="retry-btn">🔁 다시 하기</button>
-                        <button class="btn btn-outline" id="copy-btn">📋 결과 텍스트 복사</button>
-                    </div>
-                </div>
+            <div class="card" id="card">
+                <!-- JS에서 이 안의 내용을 채웁니다 -->
             </div>
         </div>
 
         <script>
             // -----------------------------
-            // 1. 직업 메타 정보 (역할 + 설명)
+            // 1. 질문 데이터 정의
             // -----------------------------
-            const jobMeta = {
-                tank_shield: {
-                    role: 'tank',
-                    title: '방패 탱커',
-                    subtitle: '앞에서 끝까지 버티는 파티의 방패',
-                    desc:
-                        '직접 맞아주고, 대신 버텨주는 역할에 끌리는 타입이에요. ' +
-                        "광역 어그로, 방벽, 보호막 같은 스킬을 좋아하고 '나 때문에 팀이 살았다'는 느낌에서 희열을 느낍니다. " +
-                        '위기 상황에서 뒤로 빠지기보다 한 번 더 앞으로 나가는 스타일!',
-                },
-                tank_orc: {
-                    role: 'tank',
-                    title: '오크 전사 탱커',
-                    subtitle: '묵직하게 맞으면서도, 한 방이 무거운 유형',
-                    desc:
-                        '엄청 튼튼하고, 느리지만 무게감 있는 플레이를 선호해요. ' +
-                        "화려함보다는 '절대 안 쓰러지는 벽' 같은 존재가 어울립니다. " +
-                        '맞으면서 앞으로 전진하는 성향이라 팀이 믿고 맡기는 타입!',
-                },
-                tank_berserker: {
-                    role: 'dps',
-                    title: '광전사',
-                    subtitle: '맞으면서 미쳐버리는 딜탱 / 전투광 타입',
-                    desc:
-                        "피가 깎일수록 오히려 더 신나는 타입! '크와아악!!!' 같은 정신없는 전투에 잘 어울립니다. " +
-                        "방어와 공격의 경계가 모호하고, '최고의 방어는 공격'이라고 믿는 스타일이에요.",
-                },
 
-                healer_magic: {
-                    role: 'healer',
-                    title: '마법 힐러',
-                    subtitle: '힐·보호막·버프를 섞어 쓰는 클래식 힐러',
-                    desc:
-                        '앞에 서서 맞기보다는, 뒤에서 팀원들의 체력·상태를 관리하는 걸 좋아해요. ' +
-                        '쿨타임, 미니맵, 파티 체력을 항상 신경 쓰며 움직이는 운영형 플레이어입니다. ' +
-                        "조용히 팀을 살려두는 '숨은 MVP' 타입!",
+            // 메인(공통) 질문 – 탱커 / 딜러 / 힐러 대분류
+            const mainQuestions = [
+                {
+                    id: 'Q1',
+                    text: '팀 프로젝트가 시작됐다. 나는 주로…',
+                    options: [
+                        {
+                            label: 'A',
+                            text: '“일단 내가 앞장설게. 문제 생기면 나한테 먼저 말해.”',
+                            scores: { tanker: 1, healer: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '“각자 할 거 나누자. 나는 내 파트 완성도로 승부 볼게.”',
+                            scores: { dealer: 1 },
+                        },
+                    ],
                 },
-                healer_paladin: {
-                    role: 'healer',
-                    title: '성기사',
-                    subtitle: '탱과 힐 사이를 오가는 정의로운 수호자',
-                    desc:
-                        '앞에서 버티는 것도, 뒤에서 보호하는 것도 둘 다 중요하다고 느끼는 스타일이에요. ' +
-                        "룰과 정의, 팀워크를 중시하고 '내가 지키겠다'라는 책임감이 강합니다. " +
-                        '방패를 든 힐러 혹은 빛의 탱커에 어울리는 성향!',
+                {
+                    id: 'Q2',
+                    text: '친구가 힘든 일이 생겨서 급하게 연락해왔다.',
+                    options: [
+                        {
+                            label: 'A',
+                            text: '일단 만나서 옆에 있어주고, 말 들어주면서 감정부터 달래준다.',
+                            scores: { healer: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '상황을 정리하고, 해결 플랜을 빠르게 같이 짠다.',
+                            scores: { tanker: 1, dealer: 1 },
+                        },
+                    ],
                 },
-                healer_physio: {
-                    role: 'healer',
-                    title: '물리치료사형 힐러',
-                    subtitle: '전투 이후 회복과 케어에 더 끌리는 타입',
-                    desc:
-                        '전투 중보다 전투 전·후의 케어, 회복, 재활 같은 걸 중요하게 생각해요. ' +
-                        '누군가를 천천히 회복시켜 주고, 다시 일어나게 하는 과정을 좋아합니다. ' +
-                        "힐량 숫자보다 '사람' 자체에 더 관심이 많은 힐러 감성!",
+                {
+                    id: 'Q3',
+                    text: '회사/학교에서 큰 문제가 터졌을 때, 더 끌리는 역할은?',
+                    options: [
+                        {
+                            label: 'A',
+                            text: '앞에 나가서 책임자처럼 상황을 정리하고 모두를 보호하는 사람',
+                            scores: { tanker: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '뒤에서 자료·방법을 찾아내고, 문제를 직접 해결하는 해결사',
+                            scores: { dealer: 1, healer: 1 },
+                        },
+                    ],
                 },
-                healer_buffer: {
-                    role: 'healer',
-                    title: '버퍼·매니저형 서포터',
-                    subtitle: '전장을 설계하고, 팀 능력을 끌어올리는 전략가',
-                    desc:
-                        "힐 자체보다, 버프·디버프·쿨타임·포지션 등 전체적인 '그림'을 보는 스타일이에요. " +
-                        '한 사람을 살리는 것보다, 다 같이 강해지는 상황을 좋아합니다. ' +
-                        '팀의 매니저, 전장의 조율자 포지션에 딱 맞는 성향!',
+                {
+                    id: 'Q4',
+                    text: '스케줄이 갑자기 꽉 찼을 때, 나는…',
+                    options: [
+                        {
+                            label: 'A',
+                            text: '중요한 사람/일부터 지키고, 나머지는 양해를 구하며 안정적으로 간다.',
+                            scores: { tanker: 1, healer: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '체력 갈 때까지 우겨 넣어서라도 한 번에 쭉 밀어붙인다.',
+                            scores: { dealer: 1 },
+                        },
+                    ],
                 },
+                {
+                    id: 'Q5',
+                    text: '나를 칭찬할 때 더 듣고 싶은 말은?',
+                    options: [
+                        {
+                            label: 'A',
+                            text: '“너 덕분에 다들 안 무너지고 버틴 거 알아?”',
+                            scores: { tanker: 1, healer: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '“와, 너 아니었으면 이 결과 절대 못 나왔어.”',
+                            scores: { dealer: 1 },
+                        },
+                    ],
+                },
+                {
+                    id: 'Q6',
+                    text: '모임에서 나는 보통…',
+                    options: [
+                        {
+                            label: 'A',
+                            text: '분위기를 살피며, 꺼지는 사람 없게 챙기고 부드럽게 만든다.',
+                            scores: { healer: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '게임/발표/장기자랑 등 내 차례에 화끈하게 터뜨리는 편이다.',
+                            scores: { dealer: 1 },
+                        },
+                    ],
+                },
+                {
+                    id: 'Q7',
+                    text: '다른 사람이 보는 내 이미지는?',
+                    options: [
+                        {
+                            label: 'A',
+                            text: '든든하다, 믿음직하다, 안정감 있다.',
+                            scores: { tanker: 1, healer: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '똑똑하다, 칼같다, 일 잘한다.',
+                            scores: { dealer: 1 },
+                        },
+                    ],
+                },
+                {
+                    id: 'Q8',
+                    text: '중요한 발표/시험 전날 밤, 나는…',
+                    options: [
+                        {
+                            label: 'A',
+                            text: '변수까지 대비해서 체크리스트를 만들고 리허설을 여러 번 한다.',
+                            scores: { tanker: 1, healer: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '핵심 포인트만 잡고, 직감+집중력으로 한 번에 쏟아붓는다.',
+                            scores: { dealer: 1 },
+                        },
+                    ],
+                },
+            ];
 
-                dps_darkmage: {
-                    role: 'dps',
-                    title: '흑마·저주 계열 마법사',
-                    subtitle: '그림자처럼 스며들어 적을 녹이는 딜러',
-                    desc:
-                        '정면승부보다는, 저주·DOT·디버프 같은 방식으로 상대를 서서히 무너뜨리는 타입이에요. ' +
-                        '눈에 잘 띄지 않는 자리에서 전장을 조종하는 걸 좋아합니다. ' +
-                        '은신·그림자·저주 콘셉트와 궁합이 좋습니다.',
+            // 탱커 서브 – 방패 / 딜탱
+            const tankerQuestions = [
+                {
+                    id: 'T1',
+                    text: '팀에 문제가 생겼을 때 더 내 스타일에 가까운 말은?',
+                    options: [
+                        {
+                            label: 'A',
+                            text: '“일단 큰일 안 나게 막고, 안전하게 수습하자.”',
+                            scores: { shield: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '“지금이 기회다. 내가 직접 들어가서 한 번에 정리해 볼게.”',
+                            scores: { dpsTank: 1 },
+                        },
+                    ],
                 },
-                dps_elemental: {
-                    role: 'dps',
-                    title: '원소 폭발 마법사',
-                    subtitle: '불·얼음·번개로 화면을 지배하는 화려한 딜러',
-                    desc:
-                        '이펙트 화려한 스킬, 광역기, 한 번에 쓸어버리는 화끈한 딜을 선호해요. ' +
-                        "위치 선정과 시전 타이밍을 재는 걸 좋아하고, '딜 미터기 1등'에 쾌감을 느낍니다. " +
-                        "딜러 중에서도 '화려한 캐리형'에 가깝습니다.",
+                {
+                    id: 'T2',
+                    text: '나의 에너지 스타일은?',
+                    options: [
+                        {
+                            label: 'A',
+                            text: '오래 버티면서 천천히, 대신 절대 안 무너지는 타입',
+                            scores: { shield: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '짧고 굵게 몰아서 터뜨리는 타입',
+                            scores: { dpsTank: 1 },
+                        },
+                    ],
                 },
-                dps_summoner: {
-                    role: 'dps',
-                    title: '소환사 / 펫 마스터',
-                    subtitle: '내 손보다는 소환수가 대신 싸우는 지휘관형',
-                    desc:
-                        '직접 휘두르는 것보다, 소환수·펫·하수인을 여러 개 띄워놓고 전장을 굴리는 걸 선호해요. ' +
-                        '내 캐릭터는 상대적으로 안전한 위치에 두고, 대신 싸우는 친구들을 조종하는 감각이 재밌는 타입!',
+                {
+                    id: 'T3',
+                    text: '상사가 무리한 일을 맡겼을 때, 나는…',
+                    options: [
+                        {
+                            label: 'A',
+                            text: '팀원들 힘 빠질까 봐 먼저 막아서 분량을 최대한 나눠 들어온다.',
+                            scores: { shield: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '“이건 이렇게 해야 빨리 끝나요” 하며 공격적으로 협상하거나 직접 처리한다.',
+                            scores: { dpsTank: 1 },
+                        },
+                    ],
                 },
-                dps_sword_dual: {
-                    role: 'dps',
-                    title: '쌍검·난전 검사',
-                    subtitle: '빠르게 파고들어 폭딜 넣고 나오는 근접 딜러',
-                    desc:
-                        "속도감 있는 전투, 치명타, 콤보, '근접 폭딜'에 끌리는 스타일이에요. " +
-                        '위험을 감수하더라도 딜을 꽂는 쪽을 선택하는 전투광에 가깝습니다.',
-                },
-                dps_sword_one: {
-                    role: 'dps',
-                    title: '일검·정석 검사',
-                    subtitle: '타겟 하나를 정교하게 파고드는 단일 딜러',
-                    desc:
-                        '광역보다는 단일 대상 집중, 패턴 파악, 타이밍 싸움을 좋아해요. ' +
-                        "정교한 한 방, 정확한 순간을 노리는 '장인형' 검사 타입입니다.",
-                },
-                dps_rogue: {
-                    role: 'dps',
-                    title: '도적 / 암살자',
-                    subtitle: '은신과 기습, 연막으로 전장을 흐리는 그림자',
-                    desc:
-                        '정면 탱킹보다는 뒷라인 파괴, 기습, 암살에 끌리는 성향이에요. ' +
-                        '연막, 은신, 이동기 등으로 왔다 갔다 하면서 적의 허점을 찌르는 플레이를 선호합니다.',
-                },
-                dps_archer: {
-                    role: 'dps',
-                    title: '궁수 / 사냥꾼',
-                    subtitle: '멀리서 치명타를 꽂는 포지셔닝 전문가',
-                    desc:
-                        '직접 몸을 섞기보다는, 거리를 유지하면서 안전하게 딜 넣는 걸 선호해요. ' +
-                        '맵 리딩, 위치 선정, 거리 유지가 중요하다고 느끼는 타입입니다. ' +
-                        '새나 동물과 파트너 플레이를 하는 궁수 콘셉트와도 잘 맞습니다.',
-                },
-            };
+            ];
 
-            // -----------------------------
-            // 2. 질문 & 보기 데이터
-            //    (새 10문항 + 짧은 선택지)
-            // -----------------------------
-            const questions = [
+            // 딜러 서브 – 마법사/검사/도적/궁수
+            const dealerQuestions = [
                 {
-                    id: 1,
-                    text: '🎯 Q1. 새 게임을 시작해서 직업 설명을 읽을 때,\n어떤 문장에 먼저 눈이 가?',
+                    id: 'D1',
+                    text: '싸움/문제 상황을 떠올렸을 때, 더 끌리는 장면은?',
                     options: [
-                        { text: '오래 키울수록 빛나는 캐릭', job: 'tank_shield' },
-                        { text: '파티랑 있을 때 더 빛나는 캐릭', job: 'healer_buffer' },
-                        { text: '손 바쁘고 내가 판 주도하는 캐릭', job: 'dps_sword_dual' },
-                        { text: '판 깔아놓고 한 방에 뒤집는 캐릭', job: 'dps_summoner' },
+                        {
+                            label: 'A',
+                            text: '한가운데로 뛰어들어 근접해서 싸우는 장면',
+                            scores: { oneSword: 1, dualSword: 1, daggerRogue: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '멀리서 각 재고, 타이밍 맞춰 한 방씩 날리는 장면',
+                            scores: { darkMage: 1, elementalist: 1, summoner: 1, archer: 1 },
+                        },
                     ],
                 },
                 {
-                    id: 2,
-                    text: '🪄 Q2. 튜토리얼 끝나고\n첫 스킬 포인트를 준다면 어디에 찍을까?',
+                    id: 'D2',
+                    text: '스타일은?',
                     options: [
-                        { text: '좀 맞아도 안 죽게 해주는 패시브', job: 'tank_orc' },
-                        { text: '모두 덜 힘들어지는 버프·회복', job: 'healer_magic' },
-                        { text: '숫자 제일 크게 터지는 공격기', job: 'dps_elemental' },
-                        { text: '소환·디버프 같은 간접 스킬', job: 'dps_darkmage' },
+                        {
+                            label: 'A',
+                            text: '정면승부, 얼굴 보고 붙어야 직성이 풀린다.',
+                            scores: { oneSword: 1, dualSword: 1, elementalist: 1, archer: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '정보를 모으고 각을 재다가, 확실한 타이밍에 기습하는 걸 좋아한다.',
+                            scores: { darkMage: 1, summoner: 1, daggerRogue: 1 },
+                        },
                     ],
                 },
                 {
-                    id: 3,
-                    text: '💀 Q3. 게임에서 죽었을 때,\n가장 “억울하다” 느끼는 순간은?',
+                    id: 'D3',
+                    text: '더 끌리는 판타지는?',
                     options: [
-                        { text: '판 깔기도 전에 잘린 느낌', job: 'tank_shield' },
-                        { text: '뭘 해보기도 전에 전투 끝남', job: 'healer_magic' },
-                        { text: '이제 마무리인데 그 순간에 누움', job: 'dps_sword_one' },
-                        { text: '이제 슬슬 터질 세팅이 리셋됨', job: 'dps_darkmage' },
+                        {
+                            label: 'A',
+                            text: '화려한 마법 이펙트와 주문, 속성 조합 연구',
+                            scores: { darkMage: 1, elementalist: 1, summoner: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '무기 스킬, 콤보, 손맛 나는 공격 모션',
+                            scores: { oneSword: 1, dualSword: 1, daggerRogue: 1, archer: 1 },
+                        },
                     ],
                 },
                 {
-                    id: 4,
-                    text: '📢 Q4. 파티 구인글을 볼 때,\n어떤 문구가 있으면 “이 파티 재밌겠다” 싶어?',
+                    id: 'D4',
+                    text: '내 플레이(일 처리) 스타일에 더 가까운 말은?',
                     options: [
-                        { text: '“실수해도 천천히 다시 갑니다”', job: 'healer_physio' },
-                        { text: '“목표만 같으면 방법은 자유”', job: 'healer_buffer' },
-                        { text: '“빠른 도전·리트 환영”', job: 'dps_sword_dual' },
-                        { text: '“특이 빌드·실험 조합 환영”', job: 'dps_rogue' },
+                        {
+                            label: 'A',
+                            text: '짧고 굵게 한 번에 몰아서 끝낸다.',
+                            scores: { elementalist: 1, dualSword: 1, oneSword: 1, daggerRogue: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '디버프, 함정, 장기전으로 서서히 말려 죽인다.',
+                            scores: { darkMage: 1, summoner: 1, archer: 1 },
+                        },
                     ],
                 },
                 {
-                    id: 5,
-                    text: '⚔ Q5. 전투 스타일 중,\n가장 재미있는 구조는?',
+                    id: 'D5',
+                    text: '더 끌리는 쪽은?',
                     options: [
-                        { text: '할수록 안정감 올라가는 전투', job: 'tank_orc' },
-                        { text: '타이밍 맞을수록 깔끔해지는 전투', job: 'healer_buffer' },
-                        { text: '손 바쁠수록 더 재밌는 전투', job: 'dps_elemental' },
-                        { text: '미리 깔아둔 세팅이 빛나는 전투', job: 'dps_rogue' },
+                        {
+                            label: 'A',
+                            text: '내가 직접 컨트롤해서 모든 타이밍과 스킬을 맞추는 플레이',
+                            scores: { darkMage: 1, elementalist: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '소환수/장치를 깔아두고, 시스템이 굴러가게 설계하는 플레이',
+                            scores: { summoner: 2 },
+                        },
+                    ],
+                },
+            ];
+
+            // 힐러 서브 – 성기사 / 마법힐러 / 버퍼
+            const healerQuestions = [
+                {
+                    id: 'H1',
+                    text: '고민 상담 들어줄 때, 먼저 떠오르는 행동은?',
+                    options: [
+                        {
+                            label: 'A',
+                            text: '한참 들어주고 공감해주며 감정을 같이 정리해 준다.',
+                            scores: { magicHealer: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '상황을 분석해서 “이건 이렇게 하는 게 좋겠다” 하고 조언·가이드를 해 준다.',
+                            scores: { paladin: 1, buffer: 1 },
+                        },
                     ],
                 },
                 {
-                    id: 6,
-                    text: '🧭 Q6. 솔플 기준으로,\n내가 가장 편하다고 느끼는 캐릭터는?',
+                    id: 'H2',
+                    text: '나와 잘 맞는 환경은?',
                     options: [
-                        { text: '실수해도 한 번 더 버틸 수 있는 캐릭', job: 'tank_shield' },
-                        { text: '자기 버프 돌리며 꾸준히 미는 캐릭', job: 'healer_paladin' },
-                        { text: '한 번 흐름 잡으면 쓸어버리는 캐릭', job: 'tank_berserker' },
-                        { text: '세팅만 해두면 알아서 돌아가는 캐릭', job: 'dps_summoner' },
+                        {
+                            label: 'A',
+                            text: '원칙과 룰이 분명해서 모두가 그 안에서 안전하게 움직이는 환경',
+                            scores: { paladin: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '분위기와 감정 흐름을 보며 유연하게 움직이는 환경',
+                            scores: { magicHealer: 1, buffer: 1 },
+                        },
                     ],
                 },
                 {
-                    id: 7,
-                    text: '🧥 Q7. 장비(룩) 기준으로 보면,\n가장 먼저 시선이 가는 건?',
+                    id: 'H3',
+                    text: '팀에서 내가 더 잘하는 쪽은?',
                     options: [
-                        { text: '딱 봐도 안 쓰러질 것 같은 갑옷', job: 'tank_orc' },
-                        { text: '문양·상징 가득한 로브·지팡이', job: 'healer_magic' },
-                        { text: '간지나는 검·쌍검·단검·활', job: 'dps_sword_dual' },
-                        { text: '후드·망토 + 펫·소환수 세트', job: 'dps_archer' },
-                    ],
-                },
-                {
-                    id: 8,
-                    text: '📖 Q8. 스토리/컨셉으로\n가장 땡기는 건?',
-                    options: [
-                        { text: '서 있기만 해도 위압감 있는 탱 느낌 캐릭', job: 'tank_orc' },
-                        { text: '빛·치유·보호로 사람 살리는 캐릭', job: 'healer_magic' },
-                        { text: '분노·복수·금단의 힘 다루는 흑화 캐릭', job: 'dps_darkmage' },
-                        { text: '계약·소환·동물·영혼 부리는 캐릭', job: 'dps_summoner' },
-                    ],
-                },
-                {
-                    id: 9,
-                    text: '🧬 Q9. 솔플 기준으로,\n내가 원하는 캐릭터 느낌은?',
-                    options: [
-                        { text: '잘못 들어가도 “일단 버텨보자” 되는 캐릭', job: 'tank_shield' },
-                        { text: '혼자 버프·회복 돌리며 마라톤 하는 캐릭', job: 'healer_physio' },
-                        { text: '몰입하면 몹이 그냥 녹아버리는 캐릭', job: 'dps_elemental' },
-                        { text: '소환수·함정·효과가 다 처리해주는 캐릭', job: 'dps_summoner' },
-                    ],
-                },
-                {
-                    id: 10,
-                    text: '📊 Q10. 전투가 끝난 뒤,\n나를 가장 뿌듯하게 만드는 결과 화면은?',
-                    options: [
-                        { text: '끝까지 자리를 꾸준히 채운 그래프', job: 'tank_shield' },
-                        { text: '자잘한 내 흔적이 여기저기 찍힌 로그', job: 'healer_buffer' },
-                        { text: '중간중간 데미지 봉우리 확 튀는 그래프', job: 'dps_sword_dual' },
-                        { text: '내 이름은 적어도, 내가 건 조건이 판 바꾼 느낌', job: 'dps_darkmage' },
+                        {
+                            label: 'A',
+                            text: '전체 일정/버프/시스템을 깔아줘 모두가 편하게 움직이게 만드는 것',
+                            scores: { buffer: 1 },
+                        },
+                        {
+                            label: 'B',
+                            text: '특정 사람(혹은 소수)을 끝까지 케어하고 지지해 주는 것',
+                            scores: { paladin: 1, magicHealer: 1 },
+                        },
                     ],
                 },
             ];
 
             // -----------------------------
-            // 3. 상태 관리용 변수
+            // 2. 결과 데이터 (직업 이름/설명)
             // -----------------------------
-            let currentIndex = 0;
-            const jobScores = {};
-            Object.keys(jobMeta).forEach((key) => (jobScores[key] = 0));
+            const resultMap = {
+                shield: {
+                    role: '탱커',
+                    name: '방패 탱커',
+                    description:
+                        '팀 앞에서 모든 화살을 대신 맞아주는 철벽 방패형 리더. 안정감과 책임감이 강해서, 사람들이 자연스럽게 당신 뒤로 숨게 되는 스타일이에요.',
+                },
+                dpsTank: {
+                    role: '탱커',
+                    name: '딜탱',
+                    description:
+                        '맞으면서 때리는 전장의 미친 존재감. 위험을 감수하고 앞으로 나가서 판을 뒤집는 타입이라, 중요한 순간에 한 번에 분위기를 바꿔버립니다.',
+                },
+                darkMage: {
+                    role: '딜러 – 마법사',
+                    name: '흑마법사',
+                    description:
+                        '조용히 저주를 쌓아 올려 시간이 지날수록 강해지는 집요한 딜러. 장기전과 전략을 좋아하고, 보이지 않는 곳에서 판을 설계하는 타입이에요.',
+                },
+                elementalist: {
+                    role: '딜러 – 마법사',
+                    name: '원소술사',
+                    description:
+                        '불·물·바람 같은 자연의 힘을 폭발적으로 다루는 원소술사. 한 번에 몰아서 터뜨리는 걸 좋아하는, 화끈한 폭발형 딜러 성향입니다.',
+                },
+                summoner: {
+                    role: '딜러 – 마법사',
+                    name: '소환사',
+                    description:
+                        '직접 싸우기보다는, 소환수와 시스템을 깔아둔 뒤 큰 흐름을 설계하는 지휘관 타입. 구조를 짜고 자동으로 돌아가게 만드는 걸 좋아해요.',
+                },
+                oneSword: {
+                    role: '딜러 – 검사',
+                    name: '일검 검사',
+                    description:
+                        '한 번의 정확한 베기로 승부 보는 정면승부형 검사. 직선적이지만 묵직한 한 방이 강점이고, 승부수를 던질 타이밍을 잘 잡는 편입니다.',
+                },
+                dualSword: {
+                    role: '딜러 – 검사',
+                    name: '쌍검 검사',
+                    description:
+                        '쉴 틈 없이 몰아치는 스피드 광전사 스타일. 속도감 있게 일·플레이를 진행하고, 리듬을 타면 폭발적으로 몰아붙이는 타입이에요.',
+                },
+                daggerRogue: {
+                    role: '딜러 – 도적',
+                    name: '단검 도적',
+                    description:
+                        '어둠 속에서 약점만 골라 찌르는 은신·기습 전문가. 중요한 포인트를 정확히 찌르는 센스가 좋고, 눈에 띄지 않게 결정적인 역할을 합니다.',
+                },
+                archer: {
+                    role: '딜러 – 궁수',
+                    name: '궁수(활)',
+                    description:
+                        '멀리서 전장을 꿰뚫어보며 안전거리에서 정확히 쏘는 스나이퍼. 거리를 두고 전체 판을 보는 걸 좋아하고, 실수 없는 안정적인 한 방이 강점입니다.',
+                },
+                paladin: {
+                    role: '힐러',
+                    name: '성기사',
+                    description:
+                        '규칙과 신념으로 팀을 보호하는 방패+힐 하이브리드. 옳다고 믿는 기준이 분명하고, 그 안에서 사람을 지키고 이끌어주는 보호자 타입이에요.',
+                },
+                magicHealer: {
+                    role: '힐러',
+                    name: '마법힐러',
+                    description:
+                        '마음부터 먼저 보듬는 감정 서포터. 이야기를 들어주고 감정을 다독이는 데 강하고, 누군가 무너질 때 곁에 있어 주는 힐링 담당입니다.',
+                },
+                buffer: {
+                    role: '힐러',
+                    name: '버퍼',
+                    description:
+                        '내가 있으면 모두가 세지는 팀 버프 장인. 시스템, 분위기, 규칙 등을 깔아줘서 팀 전체의 능력치를 올리는 서포트 플레이를 잘합니다.',
+                },
+            };
 
             // -----------------------------
-            // 4. DOM 요소 참조
+            // 3. 상태 변수
             // -----------------------------
-            const quizArea = document.getElementById('quiz-area');
-            const resultArea = document.getElementById('result-area');
+            let stage = 'intro'; // intro / main / sub / result
+            let mainIndex = 0;
+            let subIndex = 0;
+            let mainRole = null; // tanker / dealer / healer
+            let currentSubQuestions = [];
+            let mainScores = { tanker: 0, dealer: 0, healer: 0 };
+            let subScores = {}; // 직업별 점수
 
-            const questionTextEl = document.getElementById('question-text');
-            const optionsEl = document.getElementById('options');
-            const progressTextEl = document.getElementById('progress-text');
-            const progressInnerEl = document.getElementById('progress-inner');
-
-            const resultTitleEl = document.getElementById('result-title');
-            const resultSubtitleEl = document.getElementById('result-subtitle');
-            const resultDescEl = document.getElementById('result-desc');
-            const roleBarsEl = document.getElementById('role-bars');
-            const resultRolePillsEl = document.getElementById('result-role-pills');
-
-            const retryBtn = document.getElementById('retry-btn');
-            const copyBtn = document.getElementById('copy-btn');
+            const cardEl = document.getElementById('card');
 
             // -----------------------------
-            // 5. 질문 렌더링
+            // 4. 유틸 함수
             // -----------------------------
-            function renderQuestion() {
-                const total = questions.length;
-                const q = questions[currentIndex];
-
-                progressTextEl.textContent = `${currentIndex + 1} / ${total}`;
-                const percent = (currentIndex / total) * 100;
-                progressInnerEl.style.width = `${percent}%`;
-
-                questionTextEl.textContent = q.text;
-                optionsEl.innerHTML = '';
-
-                q.options.forEach((opt) => {
-                    const btn = document.createElement('button');
-                    btn.className = 'option-btn';
-                    btn.textContent = opt.text;
-                    btn.onclick = () => {
-                        handleAnswer(opt.job);
-                    };
-                    optionsEl.appendChild(btn);
+            function addScores(target, delta) {
+                Object.keys(delta).forEach((key) => {
+                    if (!(key in target)) {
+                        target[key] = 0;
+                    }
+                    target[key] += delta[key];
                 });
             }
 
-            // -----------------------------
-            // 6. 보기 클릭 시 점수 반영
-            // -----------------------------
-            function handleAnswer(jobKey) {
-                if (!jobScores[jobKey] && jobScores[jobKey] !== 0) {
-                    jobScores[jobKey] = 0;
-                }
-                jobScores[jobKey]++;
+            function getMaxKey(obj) {
+                const entries = Object.entries(obj);
+                if (entries.length === 0) return null;
+                entries.sort((a, b) => b[1] - a[1]);
+                return entries[0][0]; // [key, value] 중 key 반환
+            }
 
-                currentIndex++;
-                if (currentIndex < questions.length) {
-                    renderQuestion();
+            // -----------------------------
+            // 5. 화면 렌더링
+            // -----------------------------
+            function renderIntro() {
+                stage = 'intro';
+                cardEl.innerHTML = `
+        <h1>판타지 세계에서 나와 잘 맞는 직업은?</h1>
+        <p class="subtitle">
+          일상 속 성향으로 보는 나의 전장 포지션 테스트.<br/>
+          2지선다 질문에 답하면, 탱커 · 딜러 · 힐러부터 세부 직업까지 딱 맞는 역할을 찾아줘요.
+        </p>
+        <div class="center">
+          <button class="primary-btn" onclick="startMainQuiz()">테스트 시작하기</button>
+        </div>
+      `;
+            }
+
+            function renderMainQuestion() {
+                stage = 'main';
+                const q = mainQuestions[mainIndex];
+                const total = mainQuestions.length;
+                cardEl.innerHTML = `
+        <div class="stage-label">1단계 · 기본 성향 테스트</div>
+        <div class="progress">${mainIndex + 1} / ${total} 문항</div>
+        <div class="question-text">${q.text}</div>
+        <div class="options">
+          ${q.options
+              .map(
+                  (opt, idx) => `
+            <button class="option-btn" onclick="handleMainAnswer(${mainIndex}, ${idx})">
+              <span class="badge">${opt.label}</span>
+              <span>${opt.text}</span>
+            </button>
+          `
+              )
+              .join('')}
+        </div>
+      `;
+            }
+
+            function renderSubQuestion() {
+                stage = 'sub';
+                const q = currentSubQuestions[subIndex];
+                const total = currentSubQuestions.length;
+
+                let stageText = '';
+                if (mainRole === 'tanker') stageText = '2단계 · 탱커 세부 직업';
+                if (mainRole === 'dealer') stageText = '2단계 · 딜러 세부 직업';
+                if (mainRole === 'healer') stageText = '2단계 · 힐러 세부 직업';
+
+                cardEl.innerHTML = `
+        <div class="stage-label">${stageText}</div>
+        <div class="progress">${subIndex + 1} / ${total} 문항</div>
+        <div class="question-text">${q.text}</div>
+        <div class="options">
+          ${q.options
+              .map(
+                  (opt, idx) => `
+            <button class="option-btn" onclick="handleSubAnswer(${subIndex}, ${idx})">
+              <span class="badge">${opt.label}</span>
+              <span>${opt.text}</span>
+            </button>
+          `
+              )
+              .join('')}
+        </div>
+      `;
+            }
+
+            function renderResult() {
+                stage = 'result';
+                const key = getMaxKey(subScores);
+                const result = resultMap[key];
+
+                cardEl.innerHTML = `
+        <div class="stage-label">테스트 결과</div>
+        <div class="result-title">당신과 가장 잘 맞는 판타지 직업은…</div>
+        <div class="result-job">[ ${result.name} ]</div>
+        <div class="result-meta">
+          <span class="badge-role">${result.role}</span>
+        </div>
+        <div class="result-desc">${result.description}</div>
+        <div class="center">
+          <button class="primary-btn" onclick="restartQuiz()">다시 해보기</button>
+        </div>
+      `;
+            }
+
+            // -----------------------------
+            // 6. 이벤트 핸들러
+            // -----------------------------
+            function startMainQuiz() {
+                // 상태 초기화
+                mainIndex = 0;
+                subIndex = 0;
+                mainRole = null;
+                mainScores = { tanker: 0, dealer: 0, healer: 0 };
+                subScores = {};
+                renderMainQuestion();
+            }
+
+            function handleMainAnswer(qIndex, optIndex) {
+                const q = mainQuestions[qIndex];
+                const opt = q.options[optIndex];
+                addScores(mainScores, opt.scores);
+
+                mainIndex++;
+                if (mainIndex < mainQuestions.length) {
+                    renderMainQuestion();
                 } else {
-                    showResult();
+                    decideMainRoleAndGoSub();
                 }
             }
 
-            // -----------------------------
-            // 7. 결과 계산 & 표시
-            // -----------------------------
-            function showResult() {
-                // 마지막 질문까지 다 골랐으므로 진행도 100%
-                progressInnerEl.style.width = '100%';
+            function decideMainRoleAndGoSub() {
+                // 탱커 / 딜러 / 힐러 중 최고 점수
+                mainRole = getMaxKey(mainScores);
 
-                // 역할 점수 계산
-                const roleScores = { tank: 0, healer: 0, dps: 0 };
-                for (const [jobKey, score] of Object.entries(jobScores)) {
-                    const meta = jobMeta[jobKey];
-                    if (!meta) continue;
-                    roleScores[meta.role] += score;
+                if (mainRole === 'tanker') {
+                    currentSubQuestions = tankerQuestions;
+                    subScores = { shield: 0, dpsTank: 0 };
+                } else if (mainRole === 'dealer') {
+                    currentSubQuestions = dealerQuestions;
+                    subScores = {
+                        darkMage: 0,
+                        elementalist: 0,
+                        summoner: 0,
+                        oneSword: 0,
+                        dualSword: 0,
+                        daggerRogue: 0,
+                        archer: 0,
+                    };
+                } else if (mainRole === 'healer') {
+                    currentSubQuestions = healerQuestions;
+                    subScores = { paladin: 0, magicHealer: 0, buffer: 0 };
+                } else {
+                    // 혹시라도 아무것도 안 나오는 경우를 대비한 안전 장치
+                    mainRole = 'tanker';
+                    currentSubQuestions = tankerQuestions;
+                    subScores = { shield: 0, dpsTank: 0 };
                 }
 
-                // 최대 역할 찾기
-                let mainRole = 'tank';
-                let mainRoleScore = -1;
-                for (const [role, score] of Object.entries(roleScores)) {
-                    if (score > mainRoleScore) {
-                        mainRoleScore = score;
-                        mainRole = role;
-                    }
+                subIndex = 0;
+                renderSubQuestion();
+            }
+
+            function handleSubAnswer(qIndex, optIndex) {
+                const q = currentSubQuestions[qIndex];
+                const opt = q.options[optIndex];
+                addScores(subScores, opt.scores);
+
+                subIndex++;
+                if (subIndex < currentSubQuestions.length) {
+                    renderSubQuestion();
+                } else {
+                    renderResult();
                 }
-
-                // 해당 역할 안에서 최고 점수 직업 찾기
-                let bestJobKey = null;
-                let bestJobScore = -1;
-                for (const [jobKey, score] of Object.entries(jobScores)) {
-                    const meta = jobMeta[jobKey];
-                    if (!meta) continue;
-                    if (meta.role !== mainRole) continue;
-                    if (score > bestJobScore) {
-                        bestJobScore = score;
-                        bestJobKey = jobKey;
-                    }
-                }
-
-                const bestMeta = jobMeta[bestJobKey];
-
-                // 역할 한글 이름
-                const roleNameMap = {
-                    tank: '탱커',
-                    healer: '힐러',
-                    dps: '딜러',
-                };
-
-                // 역할 필
-                resultRolePillsEl.innerHTML = '';
-                ['tank', 'healer', 'dps'].forEach((role) => {
-                    const pill = document.createElement('span');
-                    pill.className = 'pill' + (role === mainRole ? ' main-role' : '');
-                    pill.textContent = roleNameMap[role];
-                    resultRolePillsEl.appendChild(pill);
-                });
-
-                // 제목 / 부제목 / 설명 표시
-                resultTitleEl.textContent = `【${roleNameMap[mainRole]}】 ${bestMeta.title}`;
-                resultSubtitleEl.textContent = bestMeta.subtitle;
-                resultDescEl.textContent = bestMeta.desc;
-
-                // 역할 비율 막대
-                const totalRoleScore = roleScores.tank + roleScores.healer + roleScores.dps || 1;
-                roleBarsEl.innerHTML = '';
-
-                ['tank', 'healer', 'dps'].forEach((role) => {
-                    const row = document.createElement('div');
-                    row.className = 'role-row';
-
-                    const name = document.createElement('div');
-                    name.className = 'role-name';
-                    name.textContent = roleNameMap[role];
-
-                    const wrap = document.createElement('div');
-                    wrap.className = 'role-bar-wrap';
-
-                    const inner = document.createElement('div');
-                    inner.className = 'role-bar-inner' + (role === mainRole ? ' main' : '');
-                    const ratio = (roleScores[role] / totalRoleScore) * 100;
-                    inner.style.width = `${ratio}%`;
-
-                    const percent = document.createElement('div');
-                    percent.className = 'role-percent';
-                    percent.textContent = `${Math.round(ratio)}%`;
-
-                    wrap.appendChild(inner);
-                    row.appendChild(name);
-                    row.appendChild(wrap);
-                    row.appendChild(percent);
-                    roleBarsEl.appendChild(row);
-                });
-
-                // 화면 전환
-                quizArea.classList.add('hidden');
-                resultArea.classList.remove('hidden');
             }
 
-            // -----------------------------
-            // 8. 다시 하기 & 결과 복사
-            // -----------------------------
-            function resetQuiz() {
-                currentIndex = 0;
-                Object.keys(jobScores).forEach((key) => (jobScores[key] = 0));
-                quizArea.classList.remove('hidden');
-                resultArea.classList.add('hidden');
-                renderQuestion();
+            function restartQuiz() {
+                renderIntro();
             }
 
-            function copyResultText() {
-                const text =
-                    `${resultTitleEl.textContent}\n` +
-                    `${resultSubtitleEl.textContent}\n\n` +
-                    `${resultDescEl.textContent}\n\n` +
-                    `탱커 / 힐러 / 딜러 비율\n` +
-                    `${document.getElementById('role-bars').innerText}`;
-                navigator.clipboard
-                    .writeText(text)
-                    .then(() => {
-                        alert('결과 텍스트를 클립보드에 복사했어요! 카톡에 붙여넣기 하면 됩니다. 😊');
-                    })
-                    .catch(() => {
-                        alert('복사에 실패했어요. 브라우저에서 클립보드 접근을 허용했는지 확인해 주세요.');
-                    });
-            }
+            // 전역에서 쓰는 함수들을 window에 노출 (onclick에서 사용)
+            window.startMainQuiz = startMainQuiz;
+            window.handleMainAnswer = handleMainAnswer;
+            window.handleSubAnswer = handleSubAnswer;
+            window.restartQuiz = restartQuiz;
 
-            retryBtn.addEventListener('click', resetQuiz);
-            copyBtn.addEventListener('click', copyResultText);
-
-            // -----------------------------
-            // 9. 첫 질문 렌더링
-            // -----------------------------
-            renderQuestion();
+            // 처음 화면 렌더
+            renderIntro();
         </script>
     </body>
 </html>
