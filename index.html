@@ -1,787 +1,537 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <title>판타지 직업 성향 테스트</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>
-            * {
-                box-sizing: border-box;
-            }
-            body {
-                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-                background: #0f172a;
-                color: #e5e7eb;
-                margin: 0;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: flex-start;
-                min-height: 100vh;
-            }
-            .app {
-                max-width: 640px;
-                width: 100%;
-                padding: 24px 16px 40px;
-            }
-            .card {
-                background: rgba(15, 23, 42, 0.95);
-                border-radius: 16px;
-                padding: 24px 20px 28px;
-                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-                border: 1px solid rgba(148, 163, 184, 0.4);
-            }
-            h1 {
-                font-size: 1.6rem;
-                margin: 0 0 12px;
-                color: #fbbf24;
-            }
-            .subtitle {
-                font-size: 0.95rem;
-                color: #cbd5f5;
-                margin-bottom: 20px;
-            }
-            .question-text {
-                font-size: 1.1rem;
-                margin-bottom: 18px;
-                line-height: 1.5;
-            }
-            .options {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                margin-bottom: 18px;
-            }
-            .option-btn {
-                width: 100%;
-                border-radius: 999px;
-                border: 1px solid rgba(148, 163, 184, 0.8);
-                padding: 12px 16px;
-                font-size: 0.98rem;
-                text-align: left;
-                background: rgba(15, 23, 42, 0.9);
-                color: #e5e7eb;
-                cursor: pointer;
-                display: flex;
-                gap: 8px;
-                align-items: center;
-                transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s ease;
-            }
-            .option-btn span.badge {
-                font-weight: 600;
-                font-size: 0.85rem;
-                padding: 4px 9px;
-                border-radius: 999px;
-                background: rgba(55, 65, 81, 0.9);
-                color: #f9fafb;
-            }
-            .option-btn:hover {
-                background: rgba(30, 64, 175, 0.9);
-                box-shadow: 0 8px 14px rgba(30, 64, 175, 0.4);
-                transform: translateY(-1px);
-            }
-            .option-btn:active {
-                transform: translateY(1px);
-                box-shadow: 0 4px 8px rgba(15, 23, 42, 0.7);
-            }
-            .progress {
-                font-size: 0.85rem;
-                color: #9ca3af;
-                margin-bottom: 4px;
-            }
-            .stage-label {
-                font-size: 0.82rem;
-                color: #a5b4fc;
-                margin-bottom: 12px;
-            }
-            .center {
-                text-align: center;
-            }
-            .primary-btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                padding: 11px 18px;
-                border-radius: 999px;
-                border: none;
-                background: linear-gradient(135deg, #22c55e, #3b82f6);
-                color: #f9fafb;
-                font-size: 0.98rem;
-                font-weight: 600;
-                cursor: pointer;
-                margin-top: 4px;
-                box-shadow: 0 10px 24px rgba(59, 130, 246, 0.45);
-                transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
-            }
-            .primary-btn:hover {
-                filter: brightness(1.05);
-                transform: translateY(-1px);
-                box-shadow: 0 14px 30px rgba(59, 130, 246, 0.6);
-            }
-            .primary-btn:active {
-                transform: translateY(1px);
-                box-shadow: 0 6px 14px rgba(15, 23, 42, 0.9);
-            }
-            .result-title {
-                font-size: 1.4rem;
-                margin-bottom: 8px;
-                color: #facc15;
-            }
-            .result-job {
-                font-size: 1.9rem;
-                margin-bottom: 12px;
-                color: #f97316;
-            }
-            .result-desc {
-                font-size: 0.97rem;
-                color: #e5e7eb;
-                line-height: 1.6;
-                margin-bottom: 14px;
-            }
-            .result-meta {
-                font-size: 0.9rem;
-                color: #9ca3af;
-                margin-bottom: 8px;
-            }
-            .badge-role {
-                display: inline-block;
-                padding: 3px 8px;
-                border-radius: 999px;
-                font-size: 0.8rem;
-                margin-right: 4px;
-                background: rgba(37, 99, 235, 0.28);
-                color: #bfdbfe;
-                border: 1px solid rgba(59, 130, 246, 0.6);
-            }
-            @media (max-width: 480px) {
-                .card {
-                    padding: 20px 16px 22px;
-                }
-                h1 {
-                    font-size: 1.35rem;
-                }
-                .question-text {
-                    font-size: 1.02rem;
-                }
-                .option-btn {
-                    font-size: 0.92rem;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="app">
-            <div class="card" id="card">
-                <!-- JS에서 이 안의 내용을 채웁니다 -->
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>내 직업은 판타지에서 찾겠습니다</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+<div class="quiz-wrap">
+  <div class="quiz-card">
+    <div class="quiz-header">
+      <div class="quiz-title">내 직업은 판타지에서 찾겠습니다</div>
+      <div class="quiz-subtitle">
+        이세계에 떨어진 당신, 어떤 선택을 하게 될까요?<br/>
+        장면마다 “진짜 나 같아 보이는 선택” 하나씩 골라 주세요.
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-text" id="progressText">시작 화면</div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
         </div>
+      </div>
+    </div>
 
-        <script>
-            // -----------------------------
-            // 1. 질문 데이터 정의
-            // -----------------------------
-
-            // 메인(공통) 질문 – 탱커 / 딜러 / 힐러 대분류
-            const mainQuestions = [
-                {
-                    id: 'Q1',
-                    text: '팀 프로젝트가 시작됐다. 나는 주로…',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '“일단 내가 앞장설게. 문제 생기면 나한테 먼저 말해.”',
-                            scores: { tanker: 1, healer: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '“각자 할 거 나누자. 나는 내 파트 완성도로 승부 볼게.”',
-                            scores: { dealer: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'Q2',
-                    text: '친구가 힘든 일이 생겨서 급하게 연락해왔다.',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '일단 만나서 옆에 있어주고, 말 들어주면서 감정부터 달래준다.',
-                            scores: { healer: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '상황을 정리하고, 해결 플랜을 빠르게 같이 짠다.',
-                            scores: { tanker: 1, dealer: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'Q3',
-                    text: '회사/학교에서 큰 문제가 터졌을 때, 더 끌리는 역할은?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '앞에 나가서 책임자처럼 상황을 정리하고 모두를 보호하는 사람',
-                            scores: { tanker: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '뒤에서 자료·방법을 찾아내고, 문제를 직접 해결하는 해결사',
-                            scores: { dealer: 1, healer: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'Q4',
-                    text: '스케줄이 갑자기 꽉 찼을 때, 나는…',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '중요한 사람/일부터 지키고, 나머지는 양해를 구하며 안정적으로 간다.',
-                            scores: { tanker: 1, healer: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '체력 갈 때까지 우겨 넣어서라도 한 번에 쭉 밀어붙인다.',
-                            scores: { dealer: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'Q5',
-                    text: '나를 칭찬할 때 더 듣고 싶은 말은?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '“너 덕분에 다들 안 무너지고 버틴 거 알아?”',
-                            scores: { tanker: 1, healer: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '“와, 너 아니었으면 이 결과 절대 못 나왔어.”',
-                            scores: { dealer: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'Q6',
-                    text: '모임에서 나는 보통…',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '분위기를 살피며, 꺼지는 사람 없게 챙기고 부드럽게 만든다.',
-                            scores: { healer: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '게임/발표/장기자랑 등 내 차례에 화끈하게 터뜨리는 편이다.',
-                            scores: { dealer: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'Q7',
-                    text: '다른 사람이 보는 내 이미지는?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '든든하다, 믿음직하다, 안정감 있다.',
-                            scores: { tanker: 1, healer: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '똑똑하다, 칼같다, 일 잘한다.',
-                            scores: { dealer: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'Q8',
-                    text: '중요한 발표/시험 전날 밤, 나는…',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '변수까지 대비해서 체크리스트를 만들고 리허설을 여러 번 한다.',
-                            scores: { tanker: 1, healer: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '핵심 포인트만 잡고, 직감+집중력으로 한 번에 쏟아붓는다.',
-                            scores: { dealer: 1 },
-                        },
-                    ],
-                },
-            ];
-
-            // 탱커 서브 – 방패 / 딜탱
-            const tankerQuestions = [
-                {
-                    id: 'T1',
-                    text: '팀에 문제가 생겼을 때 더 내 스타일에 가까운 말은?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '“일단 큰일 안 나게 막고, 안전하게 수습하자.”',
-                            scores: { shield: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '“지금이 기회다. 내가 직접 들어가서 한 번에 정리해 볼게.”',
-                            scores: { dpsTank: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'T2',
-                    text: '나의 에너지 스타일은?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '오래 버티면서 천천히, 대신 절대 안 무너지는 타입',
-                            scores: { shield: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '짧고 굵게 몰아서 터뜨리는 타입',
-                            scores: { dpsTank: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'T3',
-                    text: '상사가 무리한 일을 맡겼을 때, 나는…',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '팀원들 힘 빠질까 봐 먼저 막아서 분량을 최대한 나눠 들어온다.',
-                            scores: { shield: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '“이건 이렇게 해야 빨리 끝나요” 하며 공격적으로 협상하거나 직접 처리한다.',
-                            scores: { dpsTank: 1 },
-                        },
-                    ],
-                },
-            ];
-
-            // 딜러 서브 – 마법사/검사/도적/궁수
-            const dealerQuestions = [
-                {
-                    id: 'D1',
-                    text: '싸움/문제 상황을 떠올렸을 때, 더 끌리는 장면은?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '한가운데로 뛰어들어 근접해서 싸우는 장면',
-                            scores: { oneSword: 1, dualSword: 1, daggerRogue: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '멀리서 각 재고, 타이밍 맞춰 한 방씩 날리는 장면',
-                            scores: { darkMage: 1, elementalist: 1, summoner: 1, archer: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'D2',
-                    text: '스타일은?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '정면승부, 얼굴 보고 붙어야 직성이 풀린다.',
-                            scores: { oneSword: 1, dualSword: 1, elementalist: 1, archer: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '정보를 모으고 각을 재다가, 확실한 타이밍에 기습하는 걸 좋아한다.',
-                            scores: { darkMage: 1, summoner: 1, daggerRogue: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'D3',
-                    text: '더 끌리는 판타지는?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '화려한 마법 이펙트와 주문, 속성 조합 연구',
-                            scores: { darkMage: 1, elementalist: 1, summoner: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '무기 스킬, 콤보, 손맛 나는 공격 모션',
-                            scores: { oneSword: 1, dualSword: 1, daggerRogue: 1, archer: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'D4',
-                    text: '내 플레이(일 처리) 스타일에 더 가까운 말은?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '짧고 굵게 한 번에 몰아서 끝낸다.',
-                            scores: { elementalist: 1, dualSword: 1, oneSword: 1, daggerRogue: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '디버프, 함정, 장기전으로 서서히 말려 죽인다.',
-                            scores: { darkMage: 1, summoner: 1, archer: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'D5',
-                    text: '더 끌리는 쪽은?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '내가 직접 컨트롤해서 모든 타이밍과 스킬을 맞추는 플레이',
-                            scores: { darkMage: 1, elementalist: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '소환수/장치를 깔아두고, 시스템이 굴러가게 설계하는 플레이',
-                            scores: { summoner: 2 },
-                        },
-                    ],
-                },
-            ];
-
-            // 힐러 서브 – 성기사 / 마법힐러 / 버퍼
-            const healerQuestions = [
-                {
-                    id: 'H1',
-                    text: '고민 상담 들어줄 때, 먼저 떠오르는 행동은?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '한참 들어주고 공감해주며 감정을 같이 정리해 준다.',
-                            scores: { magicHealer: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '상황을 분석해서 “이건 이렇게 하는 게 좋겠다” 하고 조언·가이드를 해 준다.',
-                            scores: { paladin: 1, buffer: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'H2',
-                    text: '나와 잘 맞는 환경은?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '원칙과 룰이 분명해서 모두가 그 안에서 안전하게 움직이는 환경',
-                            scores: { paladin: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '분위기와 감정 흐름을 보며 유연하게 움직이는 환경',
-                            scores: { magicHealer: 1, buffer: 1 },
-                        },
-                    ],
-                },
-                {
-                    id: 'H3',
-                    text: '팀에서 내가 더 잘하는 쪽은?',
-                    options: [
-                        {
-                            label: 'A',
-                            text: '전체 일정/버프/시스템을 깔아줘 모두가 편하게 움직이게 만드는 것',
-                            scores: { buffer: 1 },
-                        },
-                        {
-                            label: 'B',
-                            text: '특정 사람(혹은 소수)을 끝까지 케어하고 지지해 주는 것',
-                            scores: { paladin: 1, magicHealer: 1 },
-                        },
-                    ],
-                },
-            ];
-
-            // -----------------------------
-            // 2. 결과 데이터 (직업 이름/설명)
-            // -----------------------------
-            const resultMap = {
-                shield: {
-                    role: '탱커',
-                    name: '방패 탱커',
-                    description:
-                        '팀 앞에서 모든 화살을 대신 맞아주는 철벽 방패형 리더. 안정감과 책임감이 강해서, 사람들이 자연스럽게 당신 뒤로 숨게 되는 스타일이에요.',
-                },
-                dpsTank: {
-                    role: '탱커',
-                    name: '딜탱',
-                    description:
-                        '맞으면서 때리는 전장의 미친 존재감. 위험을 감수하고 앞으로 나가서 판을 뒤집는 타입이라, 중요한 순간에 한 번에 분위기를 바꿔버립니다.',
-                },
-                darkMage: {
-                    role: '딜러 – 마법사',
-                    name: '흑마법사',
-                    description:
-                        '조용히 저주를 쌓아 올려 시간이 지날수록 강해지는 집요한 딜러. 장기전과 전략을 좋아하고, 보이지 않는 곳에서 판을 설계하는 타입이에요.',
-                },
-                elementalist: {
-                    role: '딜러 – 마법사',
-                    name: '원소술사',
-                    description:
-                        '불·물·바람 같은 자연의 힘을 폭발적으로 다루는 원소술사. 한 번에 몰아서 터뜨리는 걸 좋아하는, 화끈한 폭발형 딜러 성향입니다.',
-                },
-                summoner: {
-                    role: '딜러 – 마법사',
-                    name: '소환사',
-                    description:
-                        '직접 싸우기보다는, 소환수와 시스템을 깔아둔 뒤 큰 흐름을 설계하는 지휘관 타입. 구조를 짜고 자동으로 돌아가게 만드는 걸 좋아해요.',
-                },
-                oneSword: {
-                    role: '딜러 – 검사',
-                    name: '일검 검사',
-                    description:
-                        '한 번의 정확한 베기로 승부 보는 정면승부형 검사. 직선적이지만 묵직한 한 방이 강점이고, 승부수를 던질 타이밍을 잘 잡는 편입니다.',
-                },
-                dualSword: {
-                    role: '딜러 – 검사',
-                    name: '쌍검 검사',
-                    description:
-                        '쉴 틈 없이 몰아치는 스피드 광전사 스타일. 속도감 있게 일·플레이를 진행하고, 리듬을 타면 폭발적으로 몰아붙이는 타입이에요.',
-                },
-                daggerRogue: {
-                    role: '딜러 – 도적',
-                    name: '단검 도적',
-                    description:
-                        '어둠 속에서 약점만 골라 찌르는 은신·기습 전문가. 중요한 포인트를 정확히 찌르는 센스가 좋고, 눈에 띄지 않게 결정적인 역할을 합니다.',
-                },
-                archer: {
-                    role: '딜러 – 궁수',
-                    name: '궁수(활)',
-                    description:
-                        '멀리서 전장을 꿰뚫어보며 안전거리에서 정확히 쏘는 스나이퍼. 거리를 두고 전체 판을 보는 걸 좋아하고, 실수 없는 안정적인 한 방이 강점입니다.',
-                },
-                paladin: {
-                    role: '힐러',
-                    name: '성기사',
-                    description:
-                        '규칙과 신념으로 팀을 보호하는 방패+힐 하이브리드. 옳다고 믿는 기준이 분명하고, 그 안에서 사람을 지키고 이끌어주는 보호자 타입이에요.',
-                },
-                magicHealer: {
-                    role: '힐러',
-                    name: '마법힐러',
-                    description:
-                        '마음부터 먼저 보듬는 감정 서포터. 이야기를 들어주고 감정을 다독이는 데 강하고, 누군가 무너질 때 곁에 있어 주는 힐링 담당입니다.',
-                },
-                buffer: {
-                    role: '힐러',
-                    name: '버퍼',
-                    description:
-                        '내가 있으면 모두가 세지는 팀 버프 장인. 시스템, 분위기, 규칙 등을 깔아줘서 팀 전체의 능력치를 올리는 서포트 플레이를 잘합니다.',
-                },
-            };
-
-            // -----------------------------
-            // 3. 상태 변수
-            // -----------------------------
-            let stage = 'intro'; // intro / main / sub / result
-            let mainIndex = 0;
-            let subIndex = 0;
-            let mainRole = null; // tanker / dealer / healer
-            let currentSubQuestions = [];
-            let mainScores = { tanker: 0, dealer: 0, healer: 0 };
-            let subScores = {}; // 직업별 점수
-
-            const cardEl = document.getElementById('card');
-
-            // -----------------------------
-            // 4. 유틸 함수
-            // -----------------------------
-            function addScores(target, delta) {
-                Object.keys(delta).forEach((key) => {
-                    if (!(key in target)) {
-                        target[key] = 0;
-                    }
-                    target[key] += delta[key];
-                });
-            }
-
-            function getMaxKey(obj) {
-                const entries = Object.entries(obj);
-                if (entries.length === 0) return null;
-                entries.sort((a, b) => b[1] - a[1]);
-                return entries[0][0]; // [key, value] 중 key 반환
-            }
-
-            // -----------------------------
-            // 5. 화면 렌더링
-            // -----------------------------
-            function renderIntro() {
-                stage = 'intro';
-                cardEl.innerHTML = `
-        <h1>판타지 세계에서 나와 잘 맞는 직업은?</h1>
-        <p class="subtitle">
-          일상 속 성향으로 보는 나의 전장 포지션 테스트.<br/>
-          2지선다 질문에 답하면, 탱커 · 딜러 · 힐러부터 세부 직업까지 딱 맞는 역할을 찾아줘요.
-        </p>
-        <div class="center">
-          <button class="primary-btn" onclick="startMainQuiz()">테스트 시작하기</button>
+    <!-- 인트로 화면 -->
+    <section class="screen active" id="screenIntro">
+      <div class="intro-main">
+        <div class="intro-illust">
+          <img src="./img/main.png" alt="표지 일러스트">
         </div>
-      `;
-            }
+        <div class="intro-text">
+“눈 떠 보니, 이세계였다.”
 
-            function renderMainQuestion() {
-                stage = 'main';
-                const q = mainQuestions[mainIndex];
-                const total = mainQuestions.length;
-                cardEl.innerHTML = `
-        <div class="stage-label">1단계 · 기본 성향 테스트</div>
-        <div class="progress">${mainIndex + 1} / ${total} 문항</div>
-        <div class="question-text">${q.text}</div>
+신이 건네는 한 가지 능력,
+처음 눈을 뜬 장소,
+위기에서 취하는 당신의 선택까지.
+
+당신의 선택으로 완성되는
+나만의 판타지 직업 테스트입니다.
+        </div>
+        <button class="nav-btn nav-next" id="btnStart">테스트 시작하기</button>
+      </div>
+    </section>
+
+    <!-- 질문 화면들 -->
+    <div id="questionScreens">
+
+      <!-- Q1 -->
+      <section class="screen" data-step="1" data-qid="Q1">
+        <div class="q-illust">
+          <img src="./img/question/q1.png" alt="Q1 이미지">
+        </div>
+        <div class="question-label">Q1. 신의 선물</div>
+        <div class="question-title">
+현실에서 쓰러진 당신 앞에, 신이 나타났다.
+“이세계에서 새로운 삶을 살아보거라, 능력을 주마.”
+        </div>
+        <div class="question-body"></div>
         <div class="options">
-          ${q.options
-              .map(
-                  (opt, idx) => `
-            <button class="option-btn" onclick="handleMainAnswer(${mainIndex}, ${idx})">
-              <span class="badge">${opt.label}</span>
-              <span>${opt.text}</span>
-            </button>
-          `
-              )
-              .join('')}
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">산도 들어올릴 강력한 몸과 힘</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">불·물·바람이 조종하는 강력한 원소 마법</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">상처를 치료하고 죽은 사람도 살릴 수 있는 치유능력</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">한번 본 것은 잊지 않는 기억력과 모든 문제를 해결하는 지혜</span>
+          </button>
         </div>
-      `;
-            }
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">다음</button>
+        </div>
+        <div class="error-msg"></div>
+      </section>
 
-            function renderSubQuestion() {
-                stage = 'sub';
-                const q = currentSubQuestions[subIndex];
-                const total = currentSubQuestions.length;
-
-                let stageText = '';
-                if (mainRole === 'tanker') stageText = '2단계 · 탱커 세부 직업';
-                if (mainRole === 'dealer') stageText = '2단계 · 딜러 세부 직업';
-                if (mainRole === 'healer') stageText = '2단계 · 힐러 세부 직업';
-
-                cardEl.innerHTML = `
-        <div class="stage-label">${stageText}</div>
-        <div class="progress">${subIndex + 1} / ${total} 문항</div>
-        <div class="question-text">${q.text}</div>
+      <!-- Q2 -->
+      <section class="screen" data-step="2" data-qid="Q2">
+        <div class="q-illust">
+            <img src="./img/question/q2.png" alt="Q2 이미지">
+        </div>
+        <div class="question-label">Q2. 처음 눈을 뜬 곳</div>
+        <div class="question-title">
+눈을 뜨니 정말 이세계다. 정신 차리고 보니, 나는…
+        </div>
+        <div class="question-body"></div>
         <div class="options">
-          ${q.options
-              .map(
-                  (opt, idx) => `
-            <button class="option-btn" onclick="handleSubAnswer(${subIndex}, ${idx})">
-              <span class="badge">${opt.label}</span>
-              <span>${opt.text}</span>
-            </button>
-          `
-              )
-              .join('')}
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">다양한 몬스터와 울창한 나무들 사이, 숲 한복판에 서 있다.</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">거대한 성벽과 깃발 사이, 왕과 장군들이 모인 회의실 중앙에 서 있다.</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">상인들의 호객과 수상한 거래가 가득한 시장 뒷골목에 서 있다.</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">도시와 전장을 한눈에 볼 수 있는 높은 탑 꼭대기에 서 있다.</span>
+          </button>
         </div>
-      `;
-            }
-
-            function renderResult() {
-                stage = 'result';
-                const key = getMaxKey(subScores);
-                const result = resultMap[key];
-
-                cardEl.innerHTML = `
-        <div class="stage-label">테스트 결과</div>
-        <div class="result-title">당신과 가장 잘 맞는 판타지 직업은…</div>
-        <div class="result-job">[ ${result.name} ]</div>
-        <div class="result-meta">
-          <span class="badge-role">${result.role}</span>
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">다음</button>
         </div>
-        <div class="result-desc">${result.description}</div>
-        <div class="center">
-          <button class="primary-btn" onclick="restartQuiz()">다시 해보기</button>
+        <div class="error-msg"></div>
+      </section>
+
+      <!-- Q3 -->
+      <section class="screen" data-step="3" data-qid="Q3">
+        <div class="q-illust">
+            <img src="./img/question/q3.png" alt="Q3 이미지">
         </div>
-      `;
-            }
+        <div class="question-label">Q3. 첫 전투</div>
+        <div class="question-title">
+마을로 몬스터 떼가 쳐들어왔다.
+때마침 내 손엔 나무판자가 쥐어져 있는데, 이때 내 행동은?
+        </div>
+        <div class="question-body"></div>
+        <div class="options">
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">위험에 빠진 사람 앞으로 뛰어가 판자로 공격을 막는다.</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">우선 몬스터를 향해 휘둘러 공격을 시도한다.</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">판자로 큰 소리를 내어 적들을 유인한 뒤, 도망친다.</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">판자로 입구를 막아 몬스터가 들어오지 못하도록 막는다.</span>
+          </button>
+        </div>
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">다음</button>
+        </div>
+        <div class="error-msg"></div>
+      </section>
 
-            // -----------------------------
-            // 6. 이벤트 핸들러
-            // -----------------------------
-            function startMainQuiz() {
-                // 상태 초기화
-                mainIndex = 0;
-                subIndex = 0;
-                mainRole = null;
-                mainScores = { tanker: 0, dealer: 0, healer: 0 };
-                subScores = {};
-                renderMainQuestion();
-            }
+      <!-- Q4 -->
+      <section class="screen" data-step="4" data-qid="Q4">
+        <div class="q-illust">
+            <img src="./img/question/q4.png" alt="Q4 이미지">
+        </div>
+        <div class="question-label">Q4. 길 잃은 생명</div>
+        <div class="question-title">
+우연히 손바닥 크기의 작은 생명체가 피투성이로 쓰러져 있는 걸 발견했다.
+당신 주머니에는 단 한 번 살릴 수 있는 부활의 돌이 있다.
+이 돌은, 미래의 당신 목숨을 살릴 수도 있다.
+        </div>
+        <div class="question-body"></div>
+        <div class="options">
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">한숨을 쉬며 살리고, 집까지 데려가 보살핀다.</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">살려 준 뒤 내 갈길을 간다.</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">생명체가 어떤 능력을 가지고 있는지 비교·계산해 본 뒤 결정한다.</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">이세계에 떨어진 당신, 어떤 일이 일어날지 모르니 미래를 위해 사용하지 않는다.</span>
+          </button>
+        </div>
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">다음</button>
+        </div>
+        <div class="error-msg"></div>
+      </section>
 
-            function handleMainAnswer(qIndex, optIndex) {
-                const q = mainQuestions[qIndex];
-                const opt = q.options[optIndex];
-                addScores(mainScores, opt.scores);
+      <!-- Q5 -->
+      <section class="screen" data-step="5" data-qid="Q5">
+        <div class="q-illust">
+            <img src="./img/question/q5.png" alt="Q5 이미지">
+        </div>
+        <div class="question-label">Q5. 무너지는 성벽</div>
+        <div class="question-title">
+성벽이 무너지며 하늘에서 공격이 쏟아진다.
+시간은 얼마 남지 않았다. 나는 어디로 가서 도와야 할까?
+        </div>
+        <div class="question-body"></div>
+        <div class="options">
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">성직자, 수녀 등 여러 봉사 단체들이 모여 있는 곳</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">싸울 수 있는 전사·기사·헌터들이 모여 전투를 준비하는 곳</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">도시의 지도·기록·마법서와 함께 있는 마법사·연금술사 쪽</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">이 도시의 지휘관·왕·지도층이 보고를 받고 있는 공간</span>
+          </button>
+        </div>
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">다음</button>
+        </div>
+        <div class="error-msg"></div>
+      </section>
 
-                mainIndex++;
-                if (mainIndex < mainQuestions.length) {
-                    renderMainQuestion();
-                } else {
-                    decideMainRoleAndGoSub();
-                }
-            }
+      <!-- Q6 -->
+      <section class="screen" data-step="6" data-qid="Q6">
+        <div class="q-illust">
+            <img src="./img/question/q6.png" alt="Q6 이미지">
+        </div>
+        <div class="question-label">Q6. 가장 무능해 보이는 인간</div>
+        <div class="question-title">
+전쟁이 길어지고 있다. 전쟁의 문제점은 바로 저 사람인 것 같다.
+어떤 사람을 바꿔야 할까?
+        </div>
+        <div class="question-body"></div>
+        <div class="options">
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">최전선 전투라인의 기사단장</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">방심한 적의 뒤를 치는 암살자</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">의식·마법을 준비하는 마법사</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">전장 전체를 지휘하는 책략가</span>
+          </button>
+        </div>
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">다음</button>
+        </div>
+        <div class="error-msg"></div>
+      </section>
 
-            function decideMainRoleAndGoSub() {
-                // 탱커 / 딜러 / 힐러 중 최고 점수
-                mainRole = getMaxKey(mainScores);
+      <!-- Q7 -->
+      <section class="screen" data-step="7" data-qid="Q7">
+        <div class="q-illust">
+            <img src="./img/question/q7.png" alt="Q7 이미지">
+        </div>
+        <div class="question-label">Q7. 제안</div>
+        <div class="question-title">
+많은 모험을 통해 어느덧 영웅으로 칭송받는 당신.
+많은 사람이 몰려와 다양한 제안을 한다. 하나만 선택한다면?
+        </div>
+        <div class="question-body"></div>
+        <div class="options">
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">“악마가 나타나 옆 마을을 쑥대밭으로 만들고 있습니다. 당신의 도움이 절실합니다.”</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">“지도에도 없는 수상한 던전을 발견했어요. 분명 엄청난 보물이 있을 거예요!”</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">“고대 마법과 마물에 대한 정보가 발견됐습니다. 함께 연구해 보시겠어요?”</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">“바다·하늘·사막 모든 아름다운 광경을 즐길 수 있는, 저희 왕국에 한번 방문해 주시죠!”</span>
+          </button>
+        </div>
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">다음</button>
+        </div>
+        <div class="error-msg"></div>
+      </section>
 
-                if (mainRole === 'tanker') {
-                    currentSubQuestions = tankerQuestions;
-                    subScores = { shield: 0, dpsTank: 0 };
-                } else if (mainRole === 'dealer') {
-                    currentSubQuestions = dealerQuestions;
-                    subScores = {
-                        darkMage: 0,
-                        elementalist: 0,
-                        summoner: 0,
-                        oneSword: 0,
-                        dualSword: 0,
-                        daggerRogue: 0,
-                        archer: 0,
-                    };
-                } else if (mainRole === 'healer') {
-                    currentSubQuestions = healerQuestions;
-                    subScores = { paladin: 0, magicHealer: 0, buffer: 0 };
-                } else {
-                    // 혹시라도 아무것도 안 나오는 경우를 대비한 안전 장치
-                    mainRole = 'tanker';
-                    currentSubQuestions = tankerQuestions;
-                    subScores = { shield: 0, dpsTank: 0 };
-                }
+      <!-- Q8 -->
+      <section class="screen" data-step="8" data-qid="Q8">
+        <div class="q-illust">
+            <img src="./img/question/q8.png" alt="Q8 이미지">
+        </div>
+        <div class="question-label">Q8. 수련법 정하기</div>
+        <div class="question-title">
+전투에서 패배하고 말았다. 만회하기 위해선 더 강해져야 한다.
+결심한 첫날 밤, 스스로 세운 수련 방식은?
+        </div>
+        <div class="question-body"></div>
+        <div class="options">
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">앞으로의 계획을 세세하게 정리하여 차근히 진행해 나간다.</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">무작정 운동장/들판으로 나가, 쓰러질 때까지 단련한다.</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">낮에는 시장, 밤에는 술집… 먼저 정보가 필요하다.</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">어떻게 하면 내 스킬을 더 잘 활용할 수 있을까? 여러 아이디어를 통해 실험한다.</span>
+          </button>
+        </div>
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">다음</button>
+        </div>
+        <div class="error-msg"></div>
+      </section>
 
-                subIndex = 0;
-                renderSubQuestion();
-            }
+      <!-- Q9 -->
+      <section class="screen" data-step="9" data-qid="Q9">
+        <div class="q-illust">
+            <img src="./img/question/q9.png" alt="Q9 이미지">
+        </div>
+        <div class="question-label">Q9. 애인의 큰 사고</div>
+        <div class="question-title">
+미래를 약속한 애인이 마을에서 큰 사고를 쳤다.
+비난이 쏟아지려는 그 순간, 당신이 제일 먼저 한 행동은?
+        </div>
+        <div class="question-body"></div>
+        <div class="options">
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">주변을 빠르게 훑어보며 이 자리를 피할 방법을 찾는다.</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">역으로 사람들을 비난하며 애인을 보호한다.</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">내가 한 일이라며 모든 잘못을 나에게로 돌린다.</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">잘못한 일이라면 벌을 받아야지. 묵묵히 끝나길 기다린다.</span>
+          </button>
+        </div>
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">다음</button>
+        </div>
+        <div class="error-msg"></div>
+      </section>
 
-            function handleSubAnswer(qIndex, optIndex) {
-                const q = currentSubQuestions[qIndex];
-                const opt = q.options[optIndex];
-                addScores(subScores, opt.scores);
+      <!-- Q10 -->
+      <section class="screen" data-step="10" data-qid="Q10">
+        <div class="q-illust">
+            <img src="./img/question/q10.png" alt="Q10 이미지">
+        </div>
+        <div class="question-label">Q10. 비밀 의뢰</div>
+        <div class="question-title">
+왕이 비밀 임무를 내밀었다. 어떤 임무를 수행할까?
+        </div>
+        <div class="question-body"></div>
+        <div class="options">
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">전쟁에 정말 중요한 인물을 암살 위험으로부터 지켜야 하는 호위 임무</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">성공하면 전세를 뒤집을 수 있지만 목숨을 보장할 수 없는 암살 임무</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">적진에 숨어 중요한 정보를 수집해 오는 임무</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">긴 시간 동안 준비하여, 결전의 날에 대마법을 한 번에 터뜨리는 임무</span>
+          </button>
+        </div>
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">다음</button>
+        </div>
+        <div class="error-msg"></div>
+      </section>
 
-                subIndex++;
-                if (subIndex < currentSubQuestions.length) {
-                    renderSubQuestion();
-                } else {
-                    renderResult();
-                }
-            }
+      <!-- Q11 -->
+      <section class="screen" data-step="11" data-qid="Q11">
+        <div class="q-illust">
+            <img src="./img/question/q11.png" alt="Q11 이미지">
+        </div>
+        <div class="question-label">Q11. 비 오는 휴일</div>
+        <div class="question-title">
+궂은 날씨, 모든 약속이 취소되어 처음으로 완전한 휴일이 생겼다.
+이 하루를 제일 ‘나답게’ 쓰는 방법은?
+        </div>
+        <div class="question-body"></div>
+        <div class="options">
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">모든 물건을 싹 꺼내 정리하고, 필요한 물건도 채워 넣는다.</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">평소에 둘러보지 못했던 동네를 산책하듯 크게 한 바퀴 돌아본다.</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">번화가를 돌아다니면서 여러 새로운 볼거리를 구경한다.</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">창이 큰 카페나 집 창가에 자리를 잡고, 차 한 잔 하며 하루를 보낸다.</span>
+          </button>
+        </div>
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">다음</button>
+        </div>
+        <div class="error-msg"></div>
+      </section>
 
-            function restartQuiz() {
-                renderIntro();
-            }
+      <!-- Q12 -->
+      <section class="screen" data-step="12" data-qid="Q12">
+        <div class="q-illust">
+            <img src="./img/question/q12.png" alt="Q12 이미지">
+        </div>
+        <div class="question-label">Q12. 내가 고른 자리</div>
+        <div class="question-title">
+긴 모험이 끝났다. 내 삶도 끝을 보인다.
+당신이 마지막으로 가보고 싶은 곳은?
+        </div>
+        <div class="question-body"></div>
+        <div class="options">
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">성 꼭대기, 장엄한 성벽과 군단이 보이는 장소</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">상쾌한 바람과 따뜻한 빛이 드는 조용한 숲 속</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">사랑하는 가족들이 함께하는 아늑한 집</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">당신의 업적을 기리는 석상과 기록이 있는 박물관</span>
+          </button>
+        </div>
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">다음</button>
+        </div>
+        <div class="error-msg"></div>
+      </section>
 
-            // 전역에서 쓰는 함수들을 window에 노출 (onclick에서 사용)
-            window.startMainQuiz = startMainQuiz;
-            window.handleMainAnswer = handleMainAnswer;
-            window.handleSubAnswer = handleSubAnswer;
-            window.restartQuiz = restartQuiz;
+      <!-- Q13 -->
+      <section class="screen" data-step="13" data-qid="Q13">
+        <div class="q-illust">
+            <img src="./img/question/q13.png" alt="Q13 이미지">
+        </div>
+        <div class="question-label">Q13. 다음 생엔, 정말 하고 싶은 일</div>
+        <div class="question-title">
+긴 모험이 끝난 뒤, 신이 다시 나타났다.
+“이번 생 고생 많았다. 다음 생에는 정말 너 하고 싶은 것을 할 수 있는 힘을 줄게”
+라고 말한다. 당신의 선택은?
+        </div>
+        <div class="question-body"></div>
+        <div class="options">
+          <button class="option-btn" data-value="a">
+            <span class="key">a.</span>
+            <span class="text">이번 생에서 못 구했던 사람들을 구할 수 있는 힘</span>
+          </button>
+          <button class="option-btn" data-value="b">
+            <span class="key">b.</span>
+            <span class="text">세상의 규칙을 설계하고, 판 전체를 움직이는 힘</span>
+          </button>
+          <button class="option-btn" data-value="c">
+            <span class="key">c.</span>
+            <span class="text">몸으로 부딪치며 싸우고, 최전선에서 활동하는 힘</span>
+          </button>
+          <button class="option-btn" data-value="d">
+            <span class="key">d.</span>
+            <span class="text">연구·실험·정보·전략으로 판을 뒤집는 힘</span>
+          </button>
+        </div>
+        <div class="nav-area">
+          <button class="nav-btn nav-prev" data-nav="prev">이전</button>
+          <button class="nav-btn nav-next" data-nav="next">결과 보기</button>
+        </div>
+        <div class="error-msg"></div>
+      </section>
 
-            // 처음 화면 렌더
-            renderIntro();
-        </script>
-    </body>
+    </div>
+
+    <!-- 결과 화면 -->
+    <section class="screen" id="screenResult">
+      <div class="result-main">
+        <div class="result-badge">
+          🎲 이세계 직업 결과
+        </div>
+        <div class="result-title" id="resultTitle"></div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+        <div id="resultJobs"></div>
+        <button class="again-btn" id="btnAgain">다시 테스트하기</button>
+        <div class="score-debug" id="scoreDebug"></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+<script src="./main.js"></script>
+</body>
 </html>
