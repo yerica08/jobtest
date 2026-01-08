@@ -1,561 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');
 * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: linear-gradient(135deg, #f4f3ff, #fef5ff);
-    color: #222;
-  }
-  .quiz-wrap {
-    min-height: 100vh;
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    padding: 24px 12px;
-  }
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: "Nanum Myeongjo", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #212A4B;
+  color: #fff;
+}
+.quiz-wrap {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 24px 12px;
+}
+.quiz-card {
+  border-radius: 18px;
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.09);
+  padding: 20px 20px 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen {
+  display: none;
+  animation: fadeIn 0.25s ease;
+}
+.screen.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.intro-main {
+  margin-top: 12px;
+  text-align: center;
+}
+.intro-illust {
+  width: 100%;
+  height: 160px;
+  margin: 0 auto 10px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #fce4ff, #e1f0ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #777;
+}
+.intro-illust img {
+  width: 100%;
+}
+.intro-text {
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.6;
+  margin: 14px 0;
+  white-space: pre-line;
+}
+
+.background-pattern {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+.patter-wrapper-01 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  inset: 0;
+}
+.patter-wrapper-01 > div {
+  display: flex;
+  justify-content: space-between;
+}
+.patter-wrapper-01 img {
+  width: 40vw;
+}
+.patter-wrapper-01 .top img:last-child {
+  transform: scale(-1, 1);
+}
+.patter-wrapper-01 .bottom img:first-child {
+  transform: scale(-1, 1);
+}
+
+.patter-wrapper-02 {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: 30vh;
+  padding: 12px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.patter-wrapper-02 img {
+  height: 100%;
+}
+
+.nav-btn {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 999px;
+  border: none;
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.nav-next {
+  background: #2489f3;
+  color: #fff;
+}
+
+@media (max-width: 480px) {
   .quiz-card {
-    background: #ffffff;
-    border-radius: 18px;
-    width: 100%;
-    max-width: 520px;
-    margin: auto;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.09);
-    padding: 20px 20px 18px;
-    position: relative;
-    overflow: hidden;
-  }
-  .quiz-header {
-    margin-bottom: 16px;
-  }
-  .quiz-title {
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 4px;
-  }
-  .quiz-subtitle {
-    font-size: 13px;
-    color: #666;
-    line-height: 1.5;
-  }
-
-  /* 상단 진행 바 */
-  .progress-wrap {
-    margin: 8px 0 14px;
-  }
-  .progress-text {
-    font-size: 12px;
-    color: #777;
-    margin-bottom: 4px;
-  }
-  .progress-bar {
-    width: 100%;
-    height: 6px;
-    border-radius: 999px;
-    background: #f0f2ff;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    width: 0%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #2489f3, #7b6cff);
-    transition: width 0.25s ease;
-  }
-
-  /* 화면 전환용 */
-  .screen {
-    display: none;
-    animation: fadeIn 0.25s ease;
-  }
-  .screen.active {
-    display: block;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* 인트로 화면 */
-  .intro-main {
-    margin-top: 12px;
-    text-align: center;
-  }
-  .intro-illust {
-    width: 100%;
-    height: 160px;
-    margin: 0 auto 10px;
-    border-radius: 24px;
-    background: linear-gradient(145deg, #fce4ff, #e1f0ff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    color: #777;
-  }
-  .intro-illust img{
-    width: 100%;
-  }
-  .intro-text {
-    font-size: 13px;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 16px;
-    white-space: pre-line;
-  }
-
-  /* 질문 화면 */
-  .q-illust {
-    width: 100%;
-    height: 150px;
-    border-radius: 14px;
-    background: #f4f6ff;
-    margin-bottom: 12px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    color: #999;
-  }
-  .q-illust img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .question-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #888;
-    margin-bottom: 4px;
-  }
-  .question-title {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    line-height: 1.5;
-    white-space: pre-line;
-  }
-  .question-body {
-    font-size: 13px;
-    color: #444;
-    line-height: 1.6;
-    margin-bottom: 12px;
-    white-space: pre-line;
-  }
-
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 6px;
-  }
-  .option-btn {
-    width: 100%;
-    border-radius: 12px;
-    border: 1px solid #e2e6ff;
-    padding: 10px 11px;
-    text-align: left;
-    background: #f9f9ff;
-    font-size: 13px;
-    cursor: pointer;
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-    transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
-  }
-  .option-btn span.key {
-    font-weight: 700;
-    color: #777;
-    flex: 0 0 auto;
-  }
-  .option-btn span.text {
-    flex: 1 1 auto;
-    line-height: 1.5;
-  }
-  .option-btn:hover {
-    background: #eff4ff;
-    border-color: #c9d8ff;
-    transform: translateY(-1px);
-  }
-  .option-btn.selected {
-    background: #e6f1ff;
-    border-color: #2489f3;
-    box-shadow: 0 0 0 1px rgba(36, 137, 243, 0.1);
-  }
-
-  .nav-area {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-  }
-  .nav-btn {
-    flex: 1;
-    border-radius: 999px;
-    border: none;
-    padding: 9px 10px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .nav-prev {
-    background: #eef0fb;
-    color: #555;
-  }
-  .nav-next {
-    background: #2489f3;
-    color: #fff;
-  }
-  .nav-prev:disabled,
-  .nav-next:disabled {
-    opacity: 0.4;
-    cursor: default;
-  }
-
-  .error-msg {
-    margin-top: 6px;
-    font-size: 12px;
-    color: #d33;
-    min-height: 16px;
-  }
-
-  /* 결과 화면 */
-  .result-main {
-    margin-top: 12px;
-  }
-  .result-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 11px;
-    background: #eff4ff;
-    color: #4966b8;
-    margin-bottom: 8px;
-  }
-  .result-title {
-    font-size: 19px;
-    font-weight: 800;
-    margin-bottom: 4px;
-    line-height: 1.5;
-  }
-  .result-subtitle {
-    font-size: 13px;
-    color: #666;
-    margin-bottom: 14px;
-    line-height: 1.5;
-  }
-
-  .job-card {
-    border-radius: 14px;
-    padding: 12px 11px;
-    background: #f7f7ff;
-    border: 1px solid #e2e2ff;
-    margin-bottom: 10px;
-  }
-  .job-main-tag {
-    font-size: 11px;
-    color: #666;
-    margin-bottom: 2px;
-  }
-  .job-name {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 3px;
-  }
-  .job-novel {
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 6px;
-  }
-  .job-desc {
-    font-size: 13px;
-    line-height: 1.6;
-    margin-bottom: 4px;
-  }
-  .job-tags {
-    font-size: 11px;
-    color: #555;
-  }
-
-  .again-btn {
-    margin-top: 14px;
-    width: 100%;
-    border-radius: 999px;
-    border: none;
-    padding: 10px 10px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    background: #2489f3;
-    color: #fff;
-  }
-
-  .score-debug {
-    display: none; /* 필요하면 block 으로 바꾸면 점수 확인 가능 */
-    margin-top: 10px;
-    font-size: 11px;
-    color: #999;
-    white-space: pre-line;
-  }
-
-  @media (max-width: 480px) {
-    .quiz-card {
-      padding: 16px 14px 14px;
-      border-radius: 16px;
-    }
-    .quiz-title {
-      font-size: 18px;
-    }
-    .question-title {
-      font-size: 14px;
-    }
-    .question-body {
-      font-size: 12px;
-    }
-    .option-btn {
-      font-size: 12px;
-      padding: 9px 9px;
-    }
-  }
-
-/* 결과 화면 */
-.result-main {
-    margin-top: 12px;
-  }
-  .result-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 11px;
-    background: #eff4ff;
-    color: #4966b8;
-    margin-bottom: 8px;
-  }
-  .result-title {
-    font-size: 19px;
-    font-weight: 800;
-    margin-bottom: 4px;
-    line-height: 1.5;
-  }
-  .result-subtitle {
-    font-size: 13px;
-    color: #666;
-    margin-bottom: 14px;
-    line-height: 1.6;
-  }
-  
-  /* 직업 카드 공통 */
-  .job-card {
+    padding: 16px 14px 14px;
     border-radius: 16px;
-    padding: 14px 13px 12px;
-    background: #f7f7ff;
-    border: 1px solid #e1e2ff;
-    margin-bottom: 12px;
-    position: relative;
-    overflow: hidden;
   }
-  
-  /* 메인 직업 카드(위에 크게) */
-  .job-card.main {
-    background: radial-gradient(circle at top left, #ffe9f8 0, #f4ecff 45%, #e3f3ff 100%);
-    border: none;
-    box-shadow: 0 14px 30px rgba(83, 94, 193, 0.22);
-  }
-  
-  /* 서브 직업 카드(아래 비교용) */
-  .job-card.sub {
-    background: #fbfbff;
-  }
-  
-  /* 카드 상단 라벨 */
-  .job-main-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 3px 9px;
-    border-radius: 999px;
-    font-size: 11px;
-    background: rgba(255, 255, 255, 0.85);
-    color: #555;
-    margin-bottom: 6px;
-  }
-  .job-main-tag::before {
-    content: "◆";
-    font-size: 8px;
-  }
-  
-  /* 직업 이름 / 소설 제목 */
-  .job-name {
-    font-size: 16px;
-    font-weight: 800;
-    margin-bottom: 3px;
-    letter-spacing: -0.03em;
-  }
-  .job-novel {
-    font-size: 12px;
-    color: #5b5b8a;
-    margin-bottom: 8px;
-  }
-  
-  /* 역할 태그 / 메타 정보 */
-  .job-role-tag {
-    font-size: 11px;
-    color: #444d7a;
-    padding: 4px 8px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.8);
-    display: inline-block;
-    margin-bottom: 10px;
-  }
-  
-  /* 섹션 공통 */
-  .job-section {
-    margin-bottom: 8px;
-  }
-  .job-section-title {
-    font-size: 11px;
-    font-weight: 700;
-    color: #7a7ca0;
-    margin-bottom: 3px;
-  }
-  .job-text {
-    font-size: 12px;
-    color: #33354a;
-    line-height: 1.7;
-  }
-  
-  /* 장점/단점 리스트 */
-  .job-list {
-    list-style: disc;
-    padding-left: 16px;
-    margin: 4px 0 4px;
-  }
-  .job-list li {
-    font-size: 12px;
-    color: #33354a;
-    line-height: 1.6;
-    margin-bottom: 2px;
-  }
-  .job-tip {
-    font-size: 12px;
-    color: #444;
-    line-height: 1.7;
-    margin-top: 2px;
-  }
-  
-  /* 잘 맞는 사람 / 안 맞는 사람 */
-  .job-match-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 10px;
-    margin-top: 4px;
-  }
-  .job-match-pill {
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 999px;
-    background: #eef4ff;
-    color: #44507a;
-    white-space: nowrap;
-  }
-  .job-match-pill.bad {
-    background: #fff1f1;
-    color: #a24848;
-  }
-  
-  /* 태그 라인 */
-  .job-tags {
-    margin-top: 6px;
-    font-size: 11px;
-    color: #666;
-  }
-  
-  /* 다시하기 버튼 / 디버그는 그대로 */
-  .again-btn {
-    margin-top: 14px;
-    width: 100%;
-    border-radius: 999px;
-    border: none;
-    padding: 10px 10px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    background: #2489f3;
-    color: #fff;
-  }
-  .score-debug {
-    display: none; /* 필요하면 block 으로 변경 */
-    margin-top: 10px;
-    font-size: 11px;
-    color: #999;
-    white-space: pre-line;
-  }
-
-  /* 직업 메인 이미지 */
-.job-image {
-    width: 100%;
-    border-radius: 12px;
-    margin: 4px 0 10px;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    background: #ddd; /* 아직 이미지 없을 때 깔릴 배경 */
-  }
-  
-  /* 잘 맞는 사람 / 안 맞는 사람 + 이미지 */
-  .job-match-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 4px;
-  }
-  
-  .job-match-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 8px;
-    border-radius: 999px;
-    font-size: 11px;
-    background: #eef4ff;
-    color: #44507a;
-  }
-  
-  .job-match-pill.bad {
-    background: #fff1f1;
-    color: #a24848;
-  }
-  
-  .job-match-avatar {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    object-fit: cover;
-    background: #fff;
-    flex-shrink: 0;
-  }
-  
-  
-  @media (max-width: 480px) {
-    .job-card {
-      padding: 12px 11px 10px;
-      border-radius: 14px;
-    }
-    .job-name {
-      font-size: 15px;
-    }
-    .job-text,
-    .job-list li,
-    .job-tip {
-      font-size: 11px;
-    }
-  }
-  
+}

@@ -516,12 +516,12 @@ function updateProgress() {
 
 function showScreen(step) {
   currentStep = step;
-  screenIntro.classList.remove("active");
+  if (screenIntro) screenIntro.classList.remove("active");
   screenResult.classList.remove("active");
   questionScreens.forEach(s => s.classList.remove("active"));
 
   if (step === 0) {
-    screenIntro.classList.add("active");
+    if (screenIntro) screenIntro.classList.add("active");
   } else if (step >= 1 && step <= totalQuestions) {
     const target = questionScreens.find(s => Number(s.dataset.step) === step);
     if (target) target.classList.add("active");
@@ -700,14 +700,18 @@ function calculateResult() {
   
 
 // 이벤트 바인딩
-btnStart.addEventListener("click", () => {
-  showScreen(1);
-});
+if (btnStart) {
+  btnStart.addEventListener("click", () => {
+    showScreen(1);
+  });
+}
 
 btnAgain.addEventListener("click", () => {
-  // 초기화
+  // restart
   for (const key in answers) delete answers[key];
-  showScreen(0);
+  const restartStep =
+    document.body && document.body.dataset.autoStart === "true" ? 1 : 0;
+  showScreen(restartStep);
 });
 
 questionScreens.forEach(screen => {
@@ -744,4 +748,9 @@ questionScreens.forEach(screen => {
 });
 
 // 초기
-updateProgress();
+const autoStart = document.body && document.body.dataset.autoStart === "true";
+if (autoStart) {
+  showScreen(1);
+} else {
+  showScreen(0);
+}
